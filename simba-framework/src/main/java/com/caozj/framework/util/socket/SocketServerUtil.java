@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -156,6 +157,8 @@ public class SocketServerUtil {
 						}
 						out.flush();
 						Thread.currentThread().sleep(1000);
+					} catch (SocketTimeoutException e) {
+						logger.warn("达到socket server接收时间，仍未收到任何socket请求");
 					} catch (IOException e) {
 						logger.error("接收客户端请求失败", e);
 					} catch (InterruptedException e) {
