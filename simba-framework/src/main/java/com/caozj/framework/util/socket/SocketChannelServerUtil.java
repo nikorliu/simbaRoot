@@ -17,8 +17,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.caozj.framework.util.ApplicationContextUtil;
 
 /**
  * 使用Java NIO的Channel实现的socket server端
@@ -122,45 +126,52 @@ public class SocketChannelServerUtil {
 		ports.add(port);
 		List<byte[]> list = Collections.synchronizedList(new ArrayList<byte[]>());
 		respMap.put(port, list);
-		ServerSocketChannel serverSocketChannel = null;
-		try {
-			// Create a new server socket and set to non blocking mode
-			serverSocketChannel = ServerSocketChannel.open();
-			serverSocketChannel.configureBlocking(false);
+		new Thread(() -> {
+			ServerSocketChannel serverSocketChannel = null;
+			try {
+				logger.info("开始启动socket channel server:" + port);
+				// Create a new server socket and set to non blocking mode
+				serverSocketChannel = ServerSocketChannel.open();
+				serverSocketChannel.configureBlocking(false);
 
-			// Bind the server socket to the local host and port
-			serverSocketChannel.socket().setReuseAddress(true);
-			serverSocketChannel.socket().bind(new InetSocketAddress(port));
+				// Bind the server socket to the local host and port
+				serverSocketChannel.socket().setReuseAddress(true);
+				serverSocketChannel.socket().bind(new InetSocketAddress(port));
 
-			// Register accepts on the server socket with the selector. This
-			// step tells the selector that the socket wants to be put on the
-			// ready list when accept operations occur, so allowing multiplexed
-			// non-blocking I/O to take place.
-			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-			serverChannelMap.put(port, serverSocketChannel);
-			// Here's where everything happens. The select method will
-			// return when any operations registered above have occurred, the
-			// thread has been interrupted, etc.
-			while (selector.select() > 0 && ports.size() > 0) {
-				// Someone is ready for I/O, get the ready keys
-				Iterator<SelectionKey> it = selector.selectedKeys().iterator();
+				// Register accepts on the server socket with the selector. This
+				// step tells the selector that the socket wants to be put on
+				// the ready list when accept operations occur, so allowing
+				// multiplexed non-blocking I/O to take place.
+				serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+				serverChannelMap.put(port, serverSocketChannel);
+				logger.info("启动socket channel server成功:" + port);
+				// Here's where everything happens. The select method will
+				// return when any operations registered above have occurred,the
+				// thread has been interrupted, etc.
+				while (selector.select() > 0 && ports.size() > 0) {
+					// Someone is ready for I/O, get the ready keys
+					Iterator<SelectionKey> it = selector.selectedKeys().iterator();
+					// Walk through the ready keys collection and process date
+					// requests.
 
-				// Walk through the ready keys collection and process date
-				// requests.
-				while (it.hasNext()) {
-					SelectionKey readyKey = it.next();
-					it.remove();
-
-					// The key indexes into the selector so you
-					// can retrieve the socket that's ready for I/O
-					execute((ServerSocketChannel) readyKey.channel(), port);
+					while (it.hasNext()) {
+						SelectionKey readyKey = it.next();
+						it.remove();
+						// The key indexes into the selector so you can retrieve
+						// the socket that's ready for I/O
+						execute((ServerSocketChannel) readyKey.channel(), port);
+					}
+				}
+			} catch (Exception e) {
+				logger.error("运行socket服务异常:" + port, e);
+			} finally {
+				try {
+					SocketChannelServerUtil.stop(port);
+				} catch (Exception e) {
+					logger.error("关闭socket channel server失败:" + port, e);
 				}
 			}
-		} catch (Exception e) {
-			logger.error("运行socket服务异常:" + port, e);
-		} finally {
-			stop(port);
-		}
+		}).start();
 	}
 
 	private static void execute(ServerSocketChannel channel, int port) throws IOException {
@@ -173,11 +184,12 @@ public class SocketChannelServerUtil {
 				respList.add(content);
 				respMap.put(port, respList);
 			}
-			sendData(socketChannel, port, content);
+			sendData(socketChannel, content);
 		} finally {
 			try {
 				socketChannel.close();
 			} catch (Exception ex) {
+				logger.error("关闭socket channel server 失败:" + port, ex);
 			}
 		}
 	}
@@ -190,9 +202,17 @@ public class SocketChannelServerUtil {
 	 * @param content
 	 * @throws IOException
 	 */
-	private static void sendData(SocketChannel socketChannel, int port, byte[] content) throws IOException {
-		ByteBuffer buffer = ByteBuffer.wrap(new String("OK").getBytes());
-		socketChannel.write(buffer);
+	private static void sendData(SocketChannel socketChannel, byte[] content) throws IOException {
+		SocketResponseInterface si = ApplicationContextUtil.getBean(SocketResponseInterface.class);
+		if (si != null) {
+			String address = socketChannel.getRemoteAddress().toString();
+			String[] hosts = address.split(":");
+			String returnContent = si.getReturn(hosts[0], NumberUtils.toInt(hosts[1]), new String(content));
+			if (StringUtils.isNotEmpty(returnContent)) {
+				ByteBuffer buffer = ByteBuffer.wrap(new String(returnContent).getBytes());
+				socketChannel.write(buffer);
+			}
+		}
 	}
 
 	private static byte[] receiveData(SocketChannel socketChannel) throws IOException {
