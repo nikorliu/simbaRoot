@@ -25,7 +25,7 @@ public class SocketClientUtil {
 
 	private static final Log logger = LogFactory.getLog(SocketClientUtil.class);
 
-	private static final int TIMEOUT = 5000;
+	private static final int TIMEOUT = 60 * 1000;
 
 	private static final int FILETIMEOUT = 60000;
 
@@ -131,9 +131,11 @@ public class SocketClientUtil {
 		try {
 			s = new Socket(host, port);
 			s.setSoTimeout(timeout);
-			in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(s.getOutputStream())), true);
 			out.write(content);
+			out.flush();
+			s.shutdownOutput();
+			in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			while (StringUtils.isNotBlank(line = in.readLine())) {
 				resp.append(line);
 			}

@@ -16,9 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.caozj.framework.util.ApplicationContextUtil;
 
 /**
  * socket服务端工具类
@@ -121,14 +124,15 @@ public class SocketServerUtil {
 			@Override
 			public void run() {
 				logger.info("启动socket服务:" + port);
+				BufferedReader in = null;
+				PrintWriter out = null;
 				while (ports.contains(port)) {
 					try {
 						// 阻塞,直到有客户端连接
 						Socket socket = serverSocket.accept();
 						// 设置IO句柄
-						BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-						PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-						out.print("OK");
+						in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+						out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 						StringBuilder resp = new StringBuilder();
 						while (true) {
 							String line = in.readLine();
@@ -138,8 +142,19 @@ public class SocketServerUtil {
 							resp.append(line);
 						}
 						List<String> respList = respMap.get(port);
-						respList.add(resp.toString());
+						String responseContent = resp.toString();
+						respList.add(responseContent);
 						respMap.put(port, respList);
+						SocketResponseInterface si = ApplicationContextUtil.getBean(SocketResponseInterface.class);
+						if (si != null) {
+							String ip = socket.getInetAddress().getHostAddress();
+							int port = socket.getPort();
+							String returnContent = si.getReturn(ip, port, responseContent);
+							if (StringUtils.isNotEmpty(returnContent)) {
+								out.print(returnContent);
+							}
+						}
+						out.flush();
 						Thread.currentThread().sleep(1000);
 					} catch (IOException e) {
 						logger.error("接收客户端请求失败", e);
@@ -147,6 +162,9 @@ public class SocketServerUtil {
 						logger.error("休眠失败", e);
 					} catch (Exception e) {
 						logger.error("接收客户端请求失败", e);
+					} finally {
+						IOUtils.closeQuietly(out);
+						IOUtils.closeQuietly(in);
 					}
 
 				}

@@ -2,6 +2,7 @@ package com.caozj.framework.util.bean;
 
 import java.lang.reflect.Method;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  *
  */
 @Component
+@Primary
 public class CustomRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
 
 	@Override
