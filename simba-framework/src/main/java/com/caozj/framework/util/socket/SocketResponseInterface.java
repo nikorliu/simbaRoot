@@ -11,6 +11,8 @@ public interface SocketResponseInterface {
 	/**
 	 * 接收到socket请求之后，返回的信息
 	 * 
+	 * @param localPort
+	 *            本地接收数据的端口号
 	 * @param ip
 	 *            socket请求的ip地址
 	 * @param port
@@ -19,6 +21,6 @@ public interface SocketResponseInterface {
 	 *            socket请求收到的内容
 	 * @return
 	 */
-	String getReturn(String ip, int port, String content);
+	String getReturn(int localPort, String ip, int port, String content);
 
 }

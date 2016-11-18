@@ -8,8 +8,8 @@ import com.caozj.framework.util.socket.SocketResponseInterface;
 public class SRImpl implements SocketResponseInterface {
 
 	@Override
-	public String getReturn(String ip, int port, String content) {
-		return System.currentTimeMillis() + ":" + content + "," + ip + "," + port;
+	public String getReturn(int localPort, String ip, int port, String content) {
+		return System.currentTimeMillis() + "," + localPort + ":" + content + "," + ip + "," + port;
 	}
 
 }

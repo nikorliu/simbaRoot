@@ -148,9 +148,9 @@ public class SocketServerUtil {
 						respMap.put(port, respList);
 						SocketResponseInterface si = ApplicationContextUtil.getBean(SocketResponseInterface.class);
 						if (si != null) {
-							String ip = socket.getInetAddress().getHostAddress();
-							int port = socket.getPort();
-							String returnContent = si.getReturn(ip, port, responseContent);
+							String remoteIp = socket.getInetAddress().getHostAddress();
+							int remotePort = socket.getPort();
+							String returnContent = si.getReturn(port, remoteIp, remotePort, responseContent);
 							if (StringUtils.isNotEmpty(returnContent)) {
 								out.print(returnContent);
 							}
