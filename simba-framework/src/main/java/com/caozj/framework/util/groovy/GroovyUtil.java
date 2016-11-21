@@ -147,6 +147,7 @@ public class GroovyUtil {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
+	@SuppressWarnings("resource")
 	public static Object executeMethod(File groovyFile, String method, Object... args) throws CompilationFailedException, IOException, InstantiationException, IllegalAccessException {
 		GroovyClassLoader groovyClassLoader = new GroovyClassLoader(GroovyUtil.class.getClassLoader());
 		String key = String.valueOf(groovyFile.getPath().hashCode());

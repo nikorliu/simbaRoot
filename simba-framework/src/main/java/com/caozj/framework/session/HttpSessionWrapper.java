@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import com.caozj.common.CustomizedPropertyPlaceholderConfigurer;
 import com.caozj.model.constant.ConstantData;
 
+@SuppressWarnings("deprecation")
 public class HttpSessionWrapper implements HttpSession {
 
 	protected static final Log logger = LogFactory.getLog(HttpSessionWrapper.class);

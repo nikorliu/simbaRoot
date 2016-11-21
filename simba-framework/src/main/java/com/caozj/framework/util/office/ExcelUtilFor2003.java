@@ -41,8 +41,7 @@ public class ExcelUtilFor2003 {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void write(File excel, String sheetName, List<List<String>> rows, List<Integer> widthList,
-			List<Short> heightList) throws FileNotFoundException, IOException {
+	public static void write(File excel, String sheetName, List<List<String>> rows, List<Integer> widthList, List<Short> heightList) throws FileNotFoundException, IOException {
 		HSSFWorkbook workbook = buidWorkbook(sheetName, rows, widthList, heightList);
 		FileOutputStream out = null;
 		try {
@@ -74,14 +73,12 @@ public class ExcelUtilFor2003 {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void write(OutputStream out, String sheetName, List<List<String>> rows, List<Integer> widthList,
-			List<Short> heightList) throws FileNotFoundException, IOException {
+	public static void write(OutputStream out, String sheetName, List<List<String>> rows, List<Integer> widthList, List<Short> heightList) throws FileNotFoundException, IOException {
 		HSSFWorkbook workbook = buidWorkbook(sheetName, rows, widthList, heightList);
 		workbook.write(out);
 	}
 
-	private static HSSFWorkbook buidWorkbook(String sheetName, List<List<String>> rows, List<Integer> widthList,
-			List<Short> heightList) {
+	private static HSSFWorkbook buidWorkbook(String sheetName, List<List<String>> rows, List<Integer> widthList, List<Short> heightList) {
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet(sheetName);
 		if (widthList != null && widthList.size() > 0) {
@@ -120,8 +117,7 @@ public class ExcelUtilFor2003 {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void write(OutputStream out, String sheetName, List<List<String>> rows, List<Integer> widthList)
-			throws FileNotFoundException, IOException {
+	public static void write(OutputStream out, String sheetName, List<List<String>> rows, List<Integer> widthList) throws FileNotFoundException, IOException {
 		write(out, sheetName, rows, widthList, null);
 	}
 
@@ -139,8 +135,7 @@ public class ExcelUtilFor2003 {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void write(File excel, String sheetName, List<List<String>> rows, List<Integer> widthList)
-			throws FileNotFoundException, IOException {
+	public static void write(File excel, String sheetName, List<List<String>> rows, List<Integer> widthList) throws FileNotFoundException, IOException {
 		write(excel, sheetName, rows, widthList, null);
 	}
 
@@ -156,8 +151,7 @@ public class ExcelUtilFor2003 {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void write(OutputStream out, String sheetName, List<List<String>> rows) throws FileNotFoundException,
-			IOException {
+	public static void write(OutputStream out, String sheetName, List<List<String>> rows) throws FileNotFoundException, IOException {
 		write(out, sheetName, rows, null, null);
 	}
 
@@ -173,8 +167,7 @@ public class ExcelUtilFor2003 {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void write(File excel, String sheetName, List<List<String>> rows) throws FileNotFoundException,
-			IOException {
+	public static void write(File excel, String sheetName, List<List<String>> rows) throws FileNotFoundException, IOException {
 		write(excel, sheetName, rows, null, null);
 	}
 

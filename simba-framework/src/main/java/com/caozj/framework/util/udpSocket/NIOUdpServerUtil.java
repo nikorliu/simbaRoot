@@ -129,7 +129,7 @@ public class NIOUdpServerUtil {
 				serverChannelMap.put(port, channel);
 				logger.info("启动udp socket channel server成功:" + port);
 				ByteBuffer receiveBuffer = ByteBuffer.allocate(1024);
-				while (ports.size() > 0) {
+				while (ports.contains(port)) {
 					int n = selector.select();
 					if (n == 0) {
 						continue;

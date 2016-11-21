@@ -378,6 +378,7 @@ public class SqlUtil {
 		 * 
 		 * @author 2014年7月15日 上午10:57:49
 		 */
+		@SuppressWarnings("unchecked")
 		public <T> SQLWhereBuilder add(String sqlPart, T... values) {
 			if (values == null) {
 				// 参数没有意义，忽略

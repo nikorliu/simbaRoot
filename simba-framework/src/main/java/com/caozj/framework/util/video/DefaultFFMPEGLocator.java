@@ -35,12 +35,6 @@ import java.io.OutputStream;
 public class DefaultFFMPEGLocator extends FFMPEGLocator {
 
 	/**
-	 * Trace the version of the bundled ffmpeg executable. It's a counter: every
-	 * time the bundled ffmpeg change it is incremented by 1.
-	 */
-	private static final int myEXEversion = 1;
-
-	/**
 	 * The ffmpeg executable file path.
 	 */
 	private String path;
@@ -122,14 +116,14 @@ public class DefaultFFMPEGLocator extends FFMPEGLocator {
 				try {
 					output.close();
 				} catch (Throwable t) {
-					
+
 				}
 			}
 			if (input != null) {
 				try {
 					input.close();
 				} catch (Throwable t) {
-					
+
 				}
 			}
 		}

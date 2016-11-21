@@ -14,6 +14,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
  * @author caozj
  * 
  */
+@SuppressWarnings("deprecation")
 @Component
 public class VelocityUtil {
 

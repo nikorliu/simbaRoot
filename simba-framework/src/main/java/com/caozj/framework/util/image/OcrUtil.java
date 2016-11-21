@@ -18,6 +18,7 @@ public class OcrUtil {
 	private final String EOL = System.getProperty("line.separator");
 	private String tessPath = "C:/Program Files (x86)/Tesseract-OCR";
 
+	@SuppressWarnings("unused")
 	public String recognizeText(File imageFile, String imageFormat) throws Exception {
 		File tempImage = new File("1.tif");
 		ImageConvertUtil.convert(imageFile, tempImage);

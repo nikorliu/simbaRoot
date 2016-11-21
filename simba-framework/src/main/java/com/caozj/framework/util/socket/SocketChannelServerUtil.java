@@ -137,7 +137,7 @@ public class SocketChannelServerUtil {
 				serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 				serverChannelMap.put(port, serverSocketChannel);
 				logger.info("启动socket channel server成功:" + port);
-				while (selector.select() > 0 && ports.size() > 0) {
+				while (selector.select() > 0 && ports.contains(port)) {
 					Iterator<SelectionKey> it = selector.selectedKeys().iterator();
 					while (it.hasNext()) {
 						SelectionKey readyKey = it.next();
