@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.caozj.framework.util.socket.SocketChannelClientUtil;
 import com.caozj.framework.util.socket.SocketChannelServerUtil;
+import com.caozj.framework.util.udpSocket.NIOUdpServerUtil;
+import com.caozj.framework.util.udpSocket.UdpSocketUtil;
 
 @Controller
 @RequestMapping("/test")
@@ -26,6 +28,22 @@ public class TestController {
 	private void init() throws IOException {
 		// SocketServerUtil.start(8989);
 		SocketChannelServerUtil.start(8989);
+		NIOUdpServerUtil.start(6969);
+		UdpSocketUtil.start(8520);
+	}
+
+	@RequestMapping
+	public String sendUdp(ModelMap model) throws IOException {
+		for (int i = 0; i < 15; i++) {
+			UdpSocketUtil.send(8520, (8520 + "," + i).getBytes(), "127.0.0.1", 6969);
+		}
+
+		String r = "";
+		for (byte[] b : NIOUdpServerUtil.getResp(6969)) {
+			r += new String(b) + ",";
+		}
+		model.put("message", "*********" + r);
+		return "message";
 	}
 
 	@RequestMapping

@@ -112,39 +112,52 @@ public class NIOUdpServerUtil {
 	 * @throws IOException
 	 */
 	public static void start(final int port) throws IOException {
-		if (selector == null) {
-			selector = Selector.open();
-		}
 		if (isUsedPort(port)) {
 			throw new RuntimeException("端口已经使用:" + port);
 		}
-		ports.add(port);
-		List<byte[]> list = Collections.synchronizedList(new ArrayList<byte[]>());
-		respMap.put(port, list);
 		new Thread(() -> {
-			logger.info("开始启动udp socket channel server:" + port);
-			DatagramChannel channel = null;
 			try {
-				channel = DatagramChannel.open();
+				logger.info("开始启动udp socket channel server:" + port);
+				List<byte[]> list = Collections.synchronizedList(new ArrayList<byte[]>());
+				respMap.put(port, list);
+				Selector selector = Selector.open();
+				DatagramChannel channel = DatagramChannel.open();
 				channel.configureBlocking(false);
 				DatagramSocket socket = channel.socket();
 				socket.bind(new InetSocketAddress(port));
 				channel.register(selector, SelectionKey.OP_READ);
 				serverChannelMap.put(port, channel);
 				logger.info("启动udp socket channel server成功:" + port);
-				while (selector.select() > 0 && ports.size() > 0) {
-					ByteBuffer receiveBuffer = ByteBuffer.allocate(1024);
+				ByteBuffer receiveBuffer = ByteBuffer.allocate(1024);
+				while (ports.size() > 0) {
+					int n = selector.select();
+					if (n == 0) {
+						continue;
+					}
 					Set<SelectionKey> readyKeys = selector.selectedKeys();
 					for (SelectionKey key : readyKeys) {
 						readyKeys.remove(key);
 						if (key.isReadable()) {
 							DatagramChannel dc = (DatagramChannel) key.channel();
+							InetSocketAddress client = (InetSocketAddress) dc.receive(receiveBuffer); // 接收来自任意一个Client的数据报
 							key.interestOps(SelectionKey.OP_READ);
-							execute(dc, port, receiveBuffer);
+							byte[] content = receiveBuffer.array();
+							if (content != null) {
+								List<byte[]> respList = respMap.get(port);
+								respList.add(content);
+								respMap.put(port, respList);
+							}
+							UdpDealInterface ui = ApplicationContextUtil.getBean(UdpDealInterface.class);
+							if (ui != null) {
+								String clientIp = client.getAddress().getHostAddress();
+								int clientPort = client.getPort();
+								ui.deal(port, clientIp, clientPort, content);
+							}
+							receiveBuffer.clear();
 						}
 					}
 				}
-			} catch (Exception e) {
+			} catch (IOException e) {
 				logger.error("运行udp socket服务异常:" + port, e);
 			} finally {
 				try {
@@ -154,26 +167,7 @@ public class NIOUdpServerUtil {
 				}
 			}
 		}).start();
-	}
-
-	private static void execute(DatagramChannel dc, int port, ByteBuffer receiveBuffer) throws IOException {
-		try {
-			InetSocketAddress client = (InetSocketAddress) dc.receive(receiveBuffer); // 接收来自任意一个Client的数据报
-			byte[] content = receiveBuffer.array();
-			if (content != null) {
-				List<byte[]> respList = respMap.get(port);
-				respList.add(content);
-				respMap.put(port, respList);
-			}
-			UdpDealInterface ui = ApplicationContextUtil.getBean(UdpDealInterface.class);
-			if (ui != null) {
-				String clientIp = client.getAddress().getHostAddress();
-				int clientPort = client.getPort();
-				ui.deal(port, clientIp, clientPort, content);
-			}
-		} finally {
-			dc.close();
-		}
+		ports.add(port);
 	}
 
 	/**
