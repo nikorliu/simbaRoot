@@ -58,8 +58,11 @@ public class UploadUtil {
 	 */
 	public static String upload(byte[] content, String fileName) throws IOException {
 		String absPath = getPath() + getUniqueFileName(fileName);
-		String fullPath = CustomizedPropertyPlaceholderConfigurer.getContextProperty("files.dir") + absPath;
-		FileUtils.writeByteArrayToFile(new File(fullPath), content);
+		String fullPath = null;
+		if ("local".equals(storage)) {
+			fullPath = localDir + absPath;
+			FileUtils.writeByteArrayToFile(new File(fullPath), content);
+		}
 		return absPath;
 	}
 
@@ -69,7 +72,7 @@ public class UploadUtil {
 	 * @return
 	 */
 	public static String getPath() {
-		return "/" + localDir + format.format(new Date()) + "/";
+		return "/" + format.format(new Date()) + "/";
 	}
 
 }
