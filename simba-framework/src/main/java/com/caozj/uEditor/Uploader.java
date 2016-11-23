@@ -23,6 +23,7 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.caozj.common.CustomizedPropertyPlaceholderConfigurer;
 import com.caozj.framework.util.upload.UploadUtil;
 
 /**
@@ -53,10 +54,11 @@ public class Uploader {
 	private String title = "";
 
 	// 文件允许格式
-	private String[] allowFiles = { ".rar", ".doc", ".docx", ".zip", ".pdf", ".txt", ".swf", ".wmv", ".gif", ".png",
-			".jpg", ".jpeg", ".bmp" };
+	private String[] allowFiles = { ".rar", ".doc", ".docx", ".zip", ".pdf", ".txt", ".swf", ".wmv", ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
 	// 文件大小限制，单位KB
 	private int maxSize = 10000;
+
+	private static String storage;
 
 	private HashMap<String, String> errorInfo = new HashMap<String, String>();
 
@@ -72,6 +74,7 @@ public class Uploader {
 		tmp.put("IO", "IO异常");
 		tmp.put("DIR", "目录创建失败");
 		tmp.put("UNKNOWN", "未知错误");
+		storage = CustomizedPropertyPlaceholderConfigurer.getContextProperty("files.storage");
 	}
 
 	public void uploadFile() throws Exception {
@@ -108,7 +111,11 @@ public class Uploader {
 		}
 		this.fileName = this.getName(this.originalName);
 		this.type = this.getFileExt(this.fileName);
-		this.url = request.getContextPath() + UploadUtil.upload(file.getBytes(), file.getOriginalFilename());
+		if ("local".equals(storage)) {
+			this.url = request.getContextPath() + UploadUtil.upload(file.getBytes(), file.getOriginalFilename());
+		} else {
+			this.url = UploadUtil.upload(file.getBytes(), file.getOriginalFilename());
+		}
 		this.title = request.getParameter("pictitle");
 		this.state = this.errorInfo.get("SUCCESS");
 	}
@@ -129,16 +136,18 @@ public class Uploader {
 			while (fii.hasNext()) {
 				FileItemStream fis = fii.next();
 				if (!fis.isFormField()) {
-					this.originalName = fis.getName().substring(
-							fis.getName().lastIndexOf(System.getProperty("file.separator")) + 1);
+					this.originalName = fis.getName().substring(fis.getName().lastIndexOf(System.getProperty("file.separator")) + 1);
 					if (!this.checkFileType(this.originalName)) {
 						this.state = this.errorInfo.get("TYPE");
 						continue;
 					}
 					this.fileName = this.getName(this.originalName);
 					this.type = this.getFileExt(this.fileName);
-					this.url = request.getContextPath()
-							+ UploadUtil.upload(StreamUtils.copyToByteArray(fis.openStream()), this.originalName);
+					if ("local".equals(storage)) {
+						this.url = request.getContextPath() + UploadUtil.upload(StreamUtils.copyToByteArray(fis.openStream()), this.originalName);
+					} else {
+						this.url = UploadUtil.upload(StreamUtils.copyToByteArray(fis.openStream()), this.originalName);
+					}
 					this.state = this.errorInfo.get("SUCCESS");
 					break;
 				} else {

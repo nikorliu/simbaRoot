@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,9 @@ public class UeditorController {
 
 	// 允许上传的图片类型
 	private static final String[] IMGTYPE = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
+
+	@Value("${files.storage}")
+	private String storage;
 
 	/**
 	 * 远程抓取
@@ -80,7 +84,11 @@ public class UeditorController {
 			InputStream is = null;
 			try {
 				is = conn.getInputStream();
-				outSrc[i] = UploadUtil.upload(StreamUtils.copyToByteArray(is), saveName);
+				if ("local".equals(storage)) {
+					outSrc[i] = request.getContextPath() + UploadUtil.upload(StreamUtils.copyToByteArray(is), saveName);
+				} else {
+					outSrc[i] = UploadUtil.upload(StreamUtils.copyToByteArray(is), saveName);
+				}
 			} catch (Exception e) {
 				logger.error(e);
 			} finally {
@@ -114,8 +122,7 @@ public class UeditorController {
 		BufferedReader reader = null;
 		try {
 			searchkey = URLEncoder.encode(searchkey, "utf-8");
-			URL url = new URL("http://api.tudou.com/v3/gw?method=item.search&appKey=myKey&format=json&kw=" + searchkey
-					+ "&pageNo=1&pageSize=20&channelId=" + videotype + "&inDays=7&media=v&sort=s");
+			URL url = new URL("http://api.tudou.com/v3/gw?method=item.search&appKey=myKey&format=json&kw=" + searchkey + "&pageNo=1&pageSize=20&channelId=" + videotype + "&inDays=7&media=v&sort=s");
 			URLConnection conn = url.openConnection();
 			reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
 			String line = "";
@@ -147,8 +154,7 @@ public class UeditorController {
 		Uploader up = new Uploader(request);
 		up.setAllowFiles(ATTACHTYPE);
 		up.uploadFile();
-		String message = "{'url':'" + up.getUrl() + "','fileType':'" + up.getType() + "','state':'" + up.getState()
-				+ "','original':'" + up.getOriginalName() + "'}";
+		String message = "{'url':'" + up.getUrl() + "','fileType':'" + up.getType() + "','state':'" + up.getState() + "','original':'" + up.getOriginalName() + "'}";
 		model.addAttribute("message", message);
 		return "message";
 	}
@@ -192,8 +198,7 @@ public class UeditorController {
 		Uploader up = new Uploader(request);
 		up.setAllowFiles(IMGTYPE);
 		up.uploadFile();
-		model.addAttribute("message", "{'original':'" + up.getOriginalName() + "','url':'" + up.getUrl()
-				+ "','title':'" + up.getTitle() + "','state':'" + up.getState() + "'}");
+		model.addAttribute("message", "{'original':'" + up.getOriginalName() + "','url':'" + up.getUrl() + "','title':'" + up.getTitle() + "','state':'" + up.getState() + "'}");
 		return "message";
 	}
 

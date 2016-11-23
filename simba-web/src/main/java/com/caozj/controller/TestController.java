@@ -1,10 +1,13 @@
 package com.caozj.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.io.FileUtils;
+import org.csource.common.MyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import com.caozj.framework.util.socket.SocketChannelClientUtil;
 import com.caozj.framework.util.socket.SocketChannelServerUtil;
 import com.caozj.framework.util.udpSocket.NIOUdpServerUtil;
 import com.caozj.framework.util.udpSocket.UdpSocketUtil;
+import com.caozj.framework.util.upload.UploadUtil;
 
 @Controller
 @RequestMapping("/test")
@@ -62,6 +66,14 @@ public class TestController {
 			s += new String(b) + ",";
 		}
 		model.put("message", "*********" + s);
+		return "message";
+	}
+
+	@RequestMapping
+	public String upload(ModelMap model) throws IOException, MyException {
+		String file = "D:/web服务器测试接口.docx";
+		String message = UploadUtil.upload(FileUtils.readFileToByteArray(new File(file)), "web服务器测试接口.docx");
+		model.put("message", "*********" + message + "***************");
 		return "message";
 	}
 }

@@ -475,6 +475,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.caozj</groupId>
+			<artifactId>simba-fastdfs</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>jdk.tools</groupId>
 			<artifactId>jdk.tools</artifactId>
 			<scope>system</scope>

@@ -25,6 +25,7 @@
 		<module>simba-expressage</module>
 		<module>simba-sigar</module>
 		<module>simba-echarts</module>
+		<module>simba-fastdfs</module>
 	</modules>
 
 	<name>simbaRoot</name>
@@ -652,6 +653,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>com.github.tobato</groupId>
+				<artifactId>fastdfs-client</artifactId>
+				<version>1.25.2-RELEASE</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.activiti</groupId>
 				<artifactId>activiti-engine</artifactId>
 				<version>${activiti.version}</version>
@@ -678,6 +685,11 @@
 			<dependency>
 				<groupId>com.caozj</groupId>
 				<artifactId>simba-codeGenerate</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-fastdfs</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>

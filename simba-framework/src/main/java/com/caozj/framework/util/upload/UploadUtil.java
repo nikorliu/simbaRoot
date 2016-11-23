@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.csource.common.MyException;
 
 import com.caozj.common.CustomizedPropertyPlaceholderConfigurer;
+import com.caozj.fastdfs.FastdfsUtil;
 
 /**
  * 文件上传工具类
@@ -55,13 +57,16 @@ public class UploadUtil {
 	 *            文件名称
 	 * @return
 	 * @throws IOException
+	 * @throws MyException
 	 */
-	public static String upload(byte[] content, String fileName) throws IOException {
-		String absPath = getPath() + getUniqueFileName(fileName);
-		String fullPath = null;
+	public static String upload(byte[] content, String fileName) throws IOException, MyException {
+		String absPath = null;
 		if ("local".equals(storage)) {
-			fullPath = localDir + absPath;
+			absPath = getPath() + getUniqueFileName(fileName);
+			String fullPath = localDir + absPath;
 			FileUtils.writeByteArrayToFile(new File(fullPath), content);
+		} else if ("fastdfs".equals(storage)) {
+			absPath = FastdfsUtil.getInstance().upload(content, fileName);
 		}
 		return absPath;
 	}
