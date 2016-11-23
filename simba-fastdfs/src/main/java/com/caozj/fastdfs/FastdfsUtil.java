@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
+import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageClient1;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerServer;
@@ -71,9 +72,12 @@ public class FastdfsUtil {
 		metaList[0] = new NameValuePair("fileName", fileName);
 		metaList[1] = new NameValuePair("fileExtName", fileExtName);
 		metaList[2] = new NameValuePair("fileLength", String.valueOf(content.length));
-		String url = storageClient.upload_file1(content, fileExtName, metaList);
+		String[] result = storageClient.upload_file(content, fileExtName, metaList);
 		/** 上传完毕及时释放连接 */
 		connectionPool.checkin(trackerServer, logId);
+		String groupName = result[0];
+		String remoteFile = result[1];
+		String url = "http://" + trackerServer.getInetSocketAddress().getHostName() + ":" + ClientGlobal.getG_tracker_http_port() + "/" + groupName + "/" + remoteFile;
 		return url;
 	}
 

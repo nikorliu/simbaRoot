@@ -1,6 +1,5 @@
 package com.caozj.fastdfs;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -194,9 +193,8 @@ public class ConnectionPool {
 	}
 
 	private void initClientGlobal() throws Exception {
-		String classPath = new File(ConnectionPool.class.getResource("/").getFile()).getCanonicalPath();
-		String fdfsClientConfigFilePath = classPath + File.separator + configFile;
-		ClientGlobal.init(fdfsClientConfigFilePath);
+		ClientGlobal.init(configFile);
+		logger.info("FastDfs初始化完成:" + configFile);
 	}
 
 	public LinkedBlockingQueue<TrackerServer> getIdleConnectionPool() {
