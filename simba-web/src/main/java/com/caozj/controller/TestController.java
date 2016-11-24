@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.caozj.fastdfs.FastdfsUtil;
 import com.caozj.framework.util.socket.SocketChannelClientUtil;
 import com.caozj.framework.util.socket.SocketChannelServerUtil;
 import com.caozj.framework.util.udpSocket.NIOUdpServerUtil;
@@ -74,6 +75,13 @@ public class TestController {
 		String file = "D:/web.log";
 		String message = UploadUtil.upload(FileUtils.readFileToByteArray(new File(file)), "web.log");
 		model.put("message", "*********" + message + "***************");
+		return "message";
+	}
+
+	@RequestMapping
+	public String download(String groupName, String remoteFileName, String localPath, ModelMap model) throws IOException, MyException {
+		FastdfsUtil.getInstance().download(groupName, remoteFileName, localPath);
+		model.put("message", "download success");
 		return "message";
 	}
 }

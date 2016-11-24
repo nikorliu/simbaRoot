@@ -1,8 +1,10 @@
 package com.caozj.fastdfs;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.csource.common.MyException;
@@ -82,6 +84,24 @@ public class FastdfsUtil {
 	}
 
 	/**
+	 * 下载
+	 * 
+	 * @param groupName
+	 * @param remoteFileName
+	 * @param localPath
+	 * @throws IOException
+	 * @throws MyException
+	 */
+	public void download(String groupName, String remoteFileName, String localPath) throws IOException, MyException {
+		String logId = UUID.randomUUID().toString();
+		TrackerServer trackerServer = connectionPool.checkout(logId);
+		StorageServer storageServer = null;
+		StorageClient1 storageClient = new StorageClient1(trackerServer, storageServer);
+		byte[] content = storageClient.download_file(groupName, remoteFileName);
+		FileUtils.writeByteArrayToFile(new File(localPath), content);
+	}
+
+	/**
 	 * 删除文件
 	 * 
 	 * @param fileUrl
@@ -90,15 +110,27 @@ public class FastdfsUtil {
 	 * @throws MyException
 	 */
 	public void delete(String fileUrl) throws IOException, MyException {
-		String logId = UUID.randomUUID().toString();
-		TrackerServer trackerServer = connectionPool.checkout(logId);
-		StorageServer storageServer = null;
-		StorageClient1 storageClient = new StorageClient1(trackerServer, storageServer);
 		int index = fileUrl.lastIndexOf("/");
 		String remoteFileName = fileUrl.substring(index + 1);
 		int mIndex = fileUrl.indexOf(":");
 		int bIndex = fileUrl.indexOf("/", mIndex);
 		String groupName = fileUrl.substring(bIndex + 1, index);
+		delete(groupName, remoteFileName);
+	}
+
+	/**
+	 * 删除文件
+	 * 
+	 * @param groupName
+	 * @param remoteFileName
+	 * @throws IOException
+	 * @throws MyException
+	 */
+	public void delete(String groupName, String remoteFileName) throws IOException, MyException {
+		String logId = UUID.randomUUID().toString();
+		TrackerServer trackerServer = connectionPool.checkout(logId);
+		StorageServer storageServer = null;
+		StorageClient1 storageClient = new StorageClient1(trackerServer, storageServer);
 		storageClient.delete_file(groupName, remoteFileName);
 		/** 上传完毕及时释放连接 */
 		connectionPool.checkin(trackerServer, logId);
