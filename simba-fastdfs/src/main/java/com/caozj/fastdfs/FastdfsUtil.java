@@ -26,12 +26,13 @@ public class FastdfsUtil {
 
 	/** 连接池 */
 	private ConnectionPool connectionPool = null;
+
 	/** 连接池默认最小连接数 */
 	private long minPoolSize = 10;
+
 	/** 连接池默认最大连接数 */
 	private long maxPoolSize = 30;
-	/** 当前创建的连接数 */
-	private volatile long nowPoolSize = 0;
+
 	/** 默认等待时间（单位：秒） */
 	private long waitTimes = 200;
 
@@ -110,12 +111,8 @@ public class FastdfsUtil {
 	 * @throws MyException
 	 */
 	public void delete(String fileUrl) throws IOException, MyException {
-		int index = fileUrl.lastIndexOf("/");
-		String remoteFileName = fileUrl.substring(index + 1);
-		int mIndex = fileUrl.indexOf(":");
-		int bIndex = fileUrl.indexOf("/", mIndex);
-		String groupName = fileUrl.substring(bIndex + 1, index);
-		delete(groupName, remoteFileName);
+		String[] result = parseUrl(fileUrl);
+		delete(result[0], result[1]);
 	}
 
 	/**
@@ -148,4 +145,21 @@ public class FastdfsUtil {
 		return fileName.substring(index + 1);
 	}
 
+	/**
+	 * 解析文件地址
+	 * 
+	 * @param fileUrl
+	 * @return 0:groupName,1:remoteFileName
+	 */
+	public String[] parseUrl(String fileUrl) {
+		int beginIndex = fileUrl.indexOf("/") + 2;
+		int fromIndex = fileUrl.indexOf("/", beginIndex);
+		int toIndex = fileUrl.indexOf("/", fromIndex + 1);
+		String groupName = fileUrl.substring(fromIndex + 1, toIndex);
+		String remoteFileName = fileUrl.substring(toIndex + 1);
+		String[] result = new String[2];
+		result[0] = groupName;
+		result[1] = remoteFileName;
+		return result;
+	}
 }
