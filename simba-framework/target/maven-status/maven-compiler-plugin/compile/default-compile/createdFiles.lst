@@ -33,6 +33,7 @@ com\caozj\framework\util\common\XssUtil.class
 com\caozj\framework\distributed\DistributedUtil.class
 com\caozj\framework\util\socket\SocketChannelServerUtil.class
 com\caozj\framework\util\video\MultimediaInfo.class
+com\caozj\framework\util\socket\SocketResponseInterface.class
 com\caozj\framework\session\SessionRequestWrapper.class
 com\caozj\framework\util\common\BatchReplaceUtil$ReplaceInfo.class
 com\caozj\framework\util\sigar\SigarUtil$1.class
@@ -72,7 +73,9 @@ com\caozj\uEditor\CustomMultipartResolver.class
 com\caozj\framework\util\video\ProcessKiller.class
 com\caozj\cache\CustomKeyGenerator.class
 com\caozj\framework\session\jobs\ClearZookeeperSession.class
+com\caozj\framework\util\udpSocket\UdpSocketUtil.class
 com\caozj\framework\session\page\PageParameterUtil.class
+com\caozj\framework\util\udpSocket\NIOUdpServerUtil.class
 com\caozj\framework\session\HttpSessionWrapper.class
 com\caozj\service\CacheService.class
 com\caozj\annotation\DescAnnotation.class
@@ -128,6 +131,7 @@ com\caozj\framework\util\office\ExcelUtilFor2003.class
 com\caozj\framework\util\video\EncodingAttributes.class
 com\caozj\framework\distributed\RedisDistributedImpl$1.class
 com\caozj\framework\util\socket\SocketClientUtil.class
+com\caozj\framework\util\udpSocket\UdpDealInterface.class
 com\caozj\framework\session\DisSessionRequestWrapper.class
 com\caozj\framework\session\SessionServiceZookeeperImpl.class
 com\caozj\framework\distributed\RedisReceiveMessage.class

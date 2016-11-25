@@ -19,6 +19,8 @@
 	</bean>
 	<import resource="classpath:/SpringBeans.xml" />
 	<import resource="classpath:/SpringFramework.xml" />
+	
 	<import resource="classpath:/SpringPermission.xml" />
 	<import resource="classpath:/SpringActiviti.xml" />
+	
 </beans>
