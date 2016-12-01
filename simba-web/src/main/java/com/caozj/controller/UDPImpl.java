@@ -8,7 +8,7 @@ import com.caozj.framework.util.udpSocket.UdpDealInterface;
 
 @Component
 public class UDPImpl implements UdpDealInterface {
-	
+
 	private static final Log logger = LogFactory.getLog(UDPImpl.class);
 
 	@Override

@@ -67,8 +67,8 @@ public class CodeGenerateUtil {
 	 */
 	private void generatePageFile(String webPath, Map<String, Object> param) throws IOException, TemplateException {
 		String firstLower = param.get("firstLower").toString();
-		String jsDir = webPath + webappPath + "/js/app";
-		String jspDir = webPath + webappPath + "/WEB-INF/jsp/" + firstLower;
+		String jsDir = webPath + webappPath + "js/app";
+		String jspDir = webPath + webappPath + "WEB-INF/jsp/" + firstLower;
 		String jsFile = jsDir + "/" + firstLower + ".js";
 		String addFile = jspDir + "/add.jsp";
 		String updateFile = jspDir + "/update.jsp";

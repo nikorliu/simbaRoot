@@ -32,9 +32,9 @@ public class TestController {
 	@PostConstruct
 	private void init() throws IOException {
 		// SocketServerUtil.start(8989);
-		SocketChannelServerUtil.start(8989);
-		NIOUdpServerUtil.start(6969);
-		UdpSocketUtil.start(8520);
+		// SocketChannelServerUtil.start(8989);
+		// NIOUdpServerUtil.start(6969);
+		// UdpSocketUtil.start(8520);
 	}
 
 	@RequestMapping
