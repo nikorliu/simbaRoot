@@ -77,7 +77,7 @@ public class UploadUtil {
 	 * @return
 	 */
 	public static String getPath() {
-		return "/" + format.format(new Date()) + "/";
+		return  format.format(new Date()) + "/";
 	}
 
 }
