@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import ${packageName}.dao.${className}Dao;
 import ${packageName}.framework.util.jdbc.Jdbc;
 import ${packageName}.framework.util.jdbc.Pager;
-import com.caozj.framework.util.jdbc.StatementParameter;
+import ${packageName}.framework.util.jdbc.StatementParameter;
 import ${packageName}.model.${className};
 
 /**

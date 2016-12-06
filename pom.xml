@@ -26,6 +26,7 @@
 		<module>simba-sigar</module>
 		<module>simba-echarts</module>
 		<module>simba-fastdfs</module>
+		<module>simba-wechatUtil</module>
 	</modules>
 
 	<name>simbaRoot</name>
@@ -765,6 +766,11 @@
 			<dependency>
 				<groupId>com.caozj</groupId>
 				<artifactId>simba-echarts</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-wechatUtil</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
