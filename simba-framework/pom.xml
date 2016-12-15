@@ -475,6 +475,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.thrift</groupId>
+			<artifactId>libthrift</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-fastdfs</artifactId>
 		</dependency>
