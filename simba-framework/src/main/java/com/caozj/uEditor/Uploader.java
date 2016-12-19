@@ -112,9 +112,9 @@ public class Uploader {
 		this.fileName = this.getName(this.originalName);
 		this.type = this.getFileExt(this.fileName);
 		if ("local".equals(storage)) {
-			this.url = request.getContextPath() + UploadUtil.upload(file.getBytes(), file.getOriginalFilename(), "ueditor");
+			this.url = request.getContextPath() + UploadUtil.getInstance().getUpload().upload(file.getBytes(), file.getOriginalFilename(), "ueditor");
 		} else {
-			this.url = UploadUtil.upload(file.getBytes(), file.getOriginalFilename(), "ueditor");
+			this.url = UploadUtil.getInstance().getUpload().upload(file.getBytes(), file.getOriginalFilename(), "ueditor");
 		}
 		this.title = request.getParameter("pictitle");
 		this.state = this.errorInfo.get("SUCCESS");
@@ -144,9 +144,9 @@ public class Uploader {
 					this.fileName = this.getName(this.originalName);
 					this.type = this.getFileExt(this.fileName);
 					if ("local".equals(storage)) {
-						this.url = request.getContextPath() + UploadUtil.upload(StreamUtils.copyToByteArray(fis.openStream()), this.originalName, "ueditor");
+						this.url = request.getContextPath() + UploadUtil.getInstance().getUpload().upload(StreamUtils.copyToByteArray(fis.openStream()), this.originalName, "ueditor");
 					} else {
-						this.url = UploadUtil.upload(StreamUtils.copyToByteArray(fis.openStream()), this.originalName, "ueditor");
+						this.url = UploadUtil.getInstance().getUpload().upload(StreamUtils.copyToByteArray(fis.openStream()), this.originalName, "ueditor");
 					}
 					this.state = this.errorInfo.get("SUCCESS");
 					break;

@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import com.caozj.annotation.TimeAnnotation;
-import com.caozj.framework.util.upload.UploadUtil;
 
 /**
  * 初始化类
@@ -25,7 +24,6 @@ public class InitService {
 	private void init() {
 		logger.info("================start to init====================");
 		printlnlog();
-		UploadUtil.init();
 		logger.info("================end to init====================");
 	}
 

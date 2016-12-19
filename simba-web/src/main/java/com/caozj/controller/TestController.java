@@ -73,7 +73,7 @@ public class TestController {
 	@RequestMapping
 	public String upload(ModelMap model) throws IOException, MyException {
 		String file = "D:/web.log";
-		String message = UploadUtil.upload(FileUtils.readFileToByteArray(new File(file)), "web.log");
+		String message = UploadUtil.getInstance().getUpload().upload(FileUtils.readFileToByteArray(new File(file)), "web.log");
 		model.put("message", "*********" + message + "***************");
 		return "message";
 	}

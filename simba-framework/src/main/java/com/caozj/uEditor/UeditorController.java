@@ -85,9 +85,9 @@ public class UeditorController {
 			try {
 				is = conn.getInputStream();
 				if ("local".equals(storage)) {
-					outSrc[i] = request.getContextPath() + UploadUtil.upload(StreamUtils.copyToByteArray(is), saveName, "ueditor");
+					outSrc[i] = request.getContextPath() + UploadUtil.getInstance().getUpload().upload(StreamUtils.copyToByteArray(is), saveName, "ueditor");
 				} else {
-					outSrc[i] = UploadUtil.upload(StreamUtils.copyToByteArray(is), saveName, "ueditor");
+					outSrc[i] = UploadUtil.getInstance().getUpload().upload(StreamUtils.copyToByteArray(is), saveName, "ueditor");
 				}
 			} catch (Exception e) {
 				logger.error(e);

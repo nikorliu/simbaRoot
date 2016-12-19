@@ -49,7 +49,7 @@ public class DownloadController {
 			out = response.getOutputStream();
 			response.setContentType("application/octet-stream");
 			response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-			in = UploadUtil.download(fileName);
+			in = UploadUtil.getInstance().getUpload().download(fileName);
 			IOUtils.copy(in, out);
 		} catch (Exception e) {
 			logger.error("下载文件:[" + fileName + "]出现异常", e);

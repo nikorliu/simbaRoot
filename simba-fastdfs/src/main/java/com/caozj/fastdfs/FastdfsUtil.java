@@ -134,6 +134,23 @@ public class FastdfsUtil {
 	}
 
 	/**
+	 * 获取文件长度
+	 * 
+	 * @param groupName
+	 * @param remoteFileName
+	 * @return
+	 * @throws MyException
+	 * @throws IOException
+	 */
+	public long size(String groupName, String remoteFileName) throws IOException, MyException {
+		String logId = UUID.randomUUID().toString();
+		TrackerServer trackerServer = connectionPool.checkout(logId);
+		StorageServer storageServer = null;
+		StorageClient1 storageClient = new StorageClient1(trackerServer, storageServer);
+		return storageClient.get_file_info(groupName, remoteFileName).getFileSize();
+	}
+
+	/**
 	 * 获取文件的扩展名
 	 * 
 	 * @param fileName
