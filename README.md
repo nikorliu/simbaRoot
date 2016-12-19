@@ -20,7 +20,7 @@ http://localhost:9000/simba/
 1.2.7	
 提供上传下载统一组件	
 thirft的服务器和客户端工具类封装		
-websocket工具类封装						
+websocket工具类封装(客户端-服务端)							
 1.2.6		
 集成分布式文件系统Fastdfs	
 1.2.5				

@@ -45,12 +45,12 @@ public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 			try {
 				WebSocketHandler handlerObject = (WebSocketHandler) Class.forName(handler).newInstance();
 				if (StringUtils.isEmpty(interceptor)) {
-					registry.addHandler(handlerObject, url);
-					registry.addHandler(handlerObject, sockJs + url);
+					registry.addHandler(handlerObject, url).setAllowedOrigins("*");
+					registry.addHandler(handlerObject, sockJs + url).setAllowedOrigins("*").withSockJS();
 				} else {
 					HttpSessionHandshakeInterceptor iterceptorObject = (HttpSessionHandshakeInterceptor) Class.forName(interceptor).newInstance();
-					registry.addHandler(handlerObject, url).addInterceptors(iterceptorObject);
-					registry.addHandler(handlerObject, sockJs + url).addInterceptors(iterceptorObject);
+					registry.addHandler(handlerObject, url).addInterceptors(iterceptorObject).setAllowedOrigins("*");
+					registry.addHandler(handlerObject, sockJs + url).addInterceptors(iterceptorObject).setAllowedOrigins("*").withSockJS();
 				}
 				logger.info("websocket注册成功:" + data.toString());
 			} catch (Exception e) {
