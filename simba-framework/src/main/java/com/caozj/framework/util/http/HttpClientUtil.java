@@ -1,9 +1,8 @@
 package com.caozj.framework.util.http;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.httpclient.Header;
@@ -12,17 +11,20 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.caozj.framework.util.json.FastJsonUtil;
 import com.caozj.model.constant.ConstantData;
 
 /**
@@ -52,7 +54,7 @@ public class HttpClientUtil {
 	}
 
 	/**
-	 * 发送get请求
+	 * 发送get请求(参数不能为中文，如果要使用中文参数，请使用post提交)
 	 * 
 	 * @param url
 	 *            地址
@@ -63,7 +65,7 @@ public class HttpClientUtil {
 	}
 
 	/**
-	 * 发送get请求
+	 * 发送get请求(参数不能为中文，如果要使用中文参数，请使用post提交)
 	 * 
 	 * @param url
 	 *            地址
@@ -76,7 +78,30 @@ public class HttpClientUtil {
 	}
 
 	/**
+	 * 发送get请求 请求返回字节
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static byte[] getBytes(String url) {
+		return getBytes(url, getHttpClient());
+	}
+
+	/**
 	 * 发送get请求
+	 * 
+	 * @param url
+	 *            地址
+	 * @param params
+	 *            参数
+	 * @return
+	 */
+	public static byte[] getBytes(String url, Map<String, String> params) {
+		return getBytes(url, params, getHttpClient());
+	}
+
+	/**
+	 * 发送get请求(参数不能为中文，如果要使用中文参数，请使用post提交)
 	 * 
 	 * @param url
 	 *            地址
@@ -89,6 +114,7 @@ public class HttpClientUtil {
 		// 使用 GET 方法 ，如果服务器需要通过 HTTPS 连接，那只需要将下面 URL 中的 http 换成 https
 		String response = null;
 		HttpMethod method = new GetMethod(url);
+		method.setRequestHeader("Content-type", "text/html; charset=" + ConstantData.DEFAULT_CHARSET);
 		try {
 			client.executeMethod(method);
 			method = dealRedirect(method);
@@ -103,7 +129,34 @@ public class HttpClientUtil {
 	}
 
 	/**
-	 * 发情get请求
+	 * 发送get请求
+	 * 
+	 * @param url
+	 *            地址
+	 * @param client
+	 * @return
+	 */
+	public static byte[] getBytes(String url, HttpClient client) {
+		// 设置代理服务器地址和端口
+		// client.getHostConfiguration().setProxy("proxy_host_addr",proxy_port);
+		// 使用 GET 方法 ，如果服务器需要通过 HTTPS 连接，那只需要将下面 URL 中的 http 换成 https
+		byte[] response = null;
+		HttpMethod method = new GetMethod(url);
+		try {
+			client.executeMethod(method);
+			method = dealRedirect(method);
+			response = method.getResponseBody();
+		} catch (Exception e) {
+			logger.error("发情get请求失败", e);
+		} finally {
+			// 释放连接
+			method.releaseConnection();
+		}
+		return response;
+	}
+
+	/**
+	 * 发情get请求(参数不能为中文，如果要使用中文参数，请使用post提交)
 	 * 
 	 * @param url
 	 *            地址
@@ -115,6 +168,21 @@ public class HttpClientUtil {
 	public static String get(String url, Map<String, String> params, HttpClient client) {
 		url = buildUrl(url, params);
 		return HttpClientUtil.get(url, client);
+	}
+
+	/**
+	 * 发情get请求
+	 * 
+	 * @param url
+	 *            地址
+	 * @param params
+	 *            参数
+	 * @param client
+	 * @return
+	 */
+	public static byte[] getBytes(String url, Map<String, String> params, HttpClient client) {
+		url = buildUrl(url, params);
+		return HttpClientUtil.getBytes(url, client);
 	}
 
 	/**
@@ -141,6 +209,7 @@ public class HttpClientUtil {
 		// client.getHostConfiguration().setProxy("proxy_host_addr",proxy_port);
 		// 使用POST方法
 		HttpMethod method = new PostMethod(url);
+		method.setRequestHeader("Content-type", "text/html; charset=" + ConstantData.DEFAULT_CHARSET);
 		String response = null;
 		try {
 			client.executeMethod(method);
@@ -169,6 +238,16 @@ public class HttpClientUtil {
 	}
 
 	/**
+	 * 
+	 * @param url
+	 * @param params
+	 * @return
+	 */
+	public static String postJosn(String url, Map<String, Object> params) {
+		return postJson(url, params, getHttpClient());
+	}
+
+	/**
 	 * 发送post请求
 	 * 
 	 * @param url
@@ -188,6 +267,35 @@ public class HttpClientUtil {
 			response = method.getResponseBodyAsString();
 		} catch (Exception e) {
 			logger.error("发送post请求失败", e);
+		} finally {
+			method.releaseConnection();
+		}
+		return response;
+	}
+
+	/**
+	 * 发送post json数据请求
+	 * 
+	 * @param url
+	 *            地址
+	 * @param params
+	 *            参数
+	 * @param client
+	 * @return
+	 */
+	public static String postJson(String url, Map<String, Object> params, HttpClient client) {
+		String response = null;
+		PostMethod method = new PostMethod(url);
+		method.setRequestHeader("Content-type", "application/json; charset=" + ConstantData.DEFAULT_CHARSET);
+		try {
+			String jsonStr = FastJsonUtil.toJson(params);
+			RequestEntity requestEntity = new StringRequestEntity(jsonStr, "application/json", ConstantData.DEFAULT_CHARSET);
+			method.setRequestEntity(requestEntity);
+			client.executeMethod(method);
+			method = dealPostRedirect(method);
+			response = method.getResponseBodyAsString();
+		} catch (Exception e) {
+			logger.error("发送postJson请求失败", e);
 		} finally {
 			method.releaseConnection();
 		}
@@ -242,20 +350,14 @@ public class HttpClientUtil {
 	 * @param client
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public static String postXML(String url, File xmlFile, HttpClient client) {
 		String resp = null;
 		PostMethod post = new PostMethod(url);
 		try {
-			// 设置请求的内容直接从文件中读取
-			post.setRequestBody(new FileInputStream(xmlFile));
-			if (xmlFile.length() < Integer.MAX_VALUE) {
-				post.setRequestContentLength(xmlFile.length());
-			} else {
-				post.setRequestContentLength(EntityEnclosingMethod.CONTENT_LENGTH_CHUNKED);
-			}
+			RequestEntity requestEntity = new StringRequestEntity(FileUtils.readFileToString(xmlFile), "application/xml", ConstantData.DEFAULT_CHARSET);
+			post.setRequestEntity(requestEntity);
 			// 指定请求内容的类型
-			post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
+			post.setRequestHeader("Content-type", "application/xml; charset=" + ConstantData.DEFAULT_CHARSET);
 			client.executeMethod(post);
 			resp = post.getResponseBodyAsString();
 		} catch (Exception e) {
@@ -289,20 +391,55 @@ public class HttpClientUtil {
 	 * @param client
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public static String postXML(String url, String xml, HttpClient client) {
 		String resp = null;
 		PostMethod post = new PostMethod(url);
 		try {
-			// 设置请求的内容直接从文件中读取
-			post.setRequestBody(xml);
-			if (xml.length() < Integer.MAX_VALUE) {
-				post.setRequestContentLength(xml.length());
-			} else {
-				post.setRequestContentLength(EntityEnclosingMethod.CONTENT_LENGTH_CHUNKED);
-			}
+			RequestEntity requestEntity = new StringRequestEntity(xml, "application/xml", ConstantData.DEFAULT_CHARSET);
+			post.setRequestEntity(requestEntity);
 			// 指定请求内容的类型
-			post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
+			post.setRequestHeader("Content-type", "application/xml; charset=" + ConstantData.DEFAULT_CHARSET);
+			client.executeMethod(post);
+			resp = post.getResponseBodyAsString();
+		} catch (Exception e) {
+			logger.error("提交xml失败", e);
+		} finally {
+			post.releaseConnection();
+		}
+		return resp;
+	}
+
+	/**
+	 * 提交json数据
+	 * 
+	 * @param url
+	 *            地址
+	 * @param json
+	 *            json内容
+	 * @return
+	 */
+	public static String postJson(String url, String json) {
+		return postJson(url, json, getHttpClient());
+	}
+
+	/**
+	 * 提交json数据
+	 * 
+	 * @param url
+	 *            地址
+	 * @param json
+	 *            json内容
+	 * @param client
+	 * @return
+	 */
+	public static String postJson(String url, String json, HttpClient client) {
+		String resp = null;
+		PostMethod post = new PostMethod(url);
+		try {
+			RequestEntity requestEntity = new StringRequestEntity(json, "application/json", ConstantData.DEFAULT_CHARSET);
+			post.setRequestEntity(requestEntity);
+			// 指定请求内容的类型
+			post.setRequestHeader("Content-type", "application/json; charset=" + ConstantData.DEFAULT_CHARSET);
 			client.executeMethod(post);
 			resp = post.getResponseBodyAsString();
 		} catch (Exception e) {
@@ -324,6 +461,52 @@ public class HttpClientUtil {
 	 */
 	public static String fileUpload(String url, String filePath) {
 		return fileUpload(url, filePath, getHttpClient());
+	}
+
+	/**
+	 * 文件上传
+	 * 
+	 * @param url
+	 *            地址
+	 * @param fileMap
+	 *            [fileName:filePath]
+	 * @return
+	 */
+	public static String fileUpload(String url, Map<String, String> fileMap) {
+		return fileUpload(url, fileMap, getHttpClient());
+	}
+
+	/**
+	 * 文件上传
+	 * 
+	 * @param url
+	 *            地址
+	 * @param fileMap
+	 *            [fileName:filePath]
+	 * @param client
+	 * @return
+	 */
+	public static String fileUpload(String url, Map<String, String> fileMap, HttpClient client) {
+		client.getHttpConnectionManager().getParams().setConnectionTimeout(fileUploadTimeout);
+		PostMethod filePost = new PostMethod(url);
+		Part[] parts = new Part[fileMap.size()];
+		String resp = null;
+		int i = 0;
+		try {
+			for (Iterator<Map.Entry<String, String>> iterator = fileMap.entrySet().iterator(); iterator.hasNext();) {
+				Map.Entry<String, String> entry = (Map.Entry<String, String>) iterator.next();
+				parts[i] = new FilePart(entry.getKey(), new File(entry.getValue()));
+				i++;
+			}
+			filePost.setRequestEntity(new MultipartRequestEntity(parts, filePost.getParams()));
+			client.executeMethod(filePost);
+			resp = filePost.getResponseBodyAsString();
+		} catch (Exception e) {
+			logger.error("上传文件失败", e);
+		} finally {
+			filePost.releaseConnection();
+		}
+		return resp;
 	}
 
 	/**
@@ -374,6 +557,60 @@ public class HttpClientUtil {
 	 * 
 	 * @param url
 	 *            地址
+	 * @param fileMap
+	 *            [fileName:filePath]
+	 * @param params
+	 *            参数
+	 * @return
+	 */
+	public static String fileUpload(String url, Map<String, String> fileMap, Map<String, String> params) {
+		return fileUpload(url, fileMap, params, getHttpClient());
+	}
+
+	/**
+	 * 文件上传
+	 * 
+	 * @param url
+	 *            地址
+	 * @param fileMap
+	 *            [fileName:filePath]
+	 * @param params
+	 *            参数
+	 * @param client
+	 * @return
+	 */
+	public static String fileUpload(String url, Map<String, String> fileMap, Map<String, String> params, HttpClient client) {
+		client.getHttpConnectionManager().getParams().setConnectionTimeout(fileUploadTimeout);
+		PostMethod filePost = new PostMethod(url);
+		String resp = null;
+		try {
+			Part[] parts = new Part[params.size() + fileMap.size()];
+			int index = 0;
+			for (Map.Entry<String, String> entry : params.entrySet()) {
+				parts[index] = new StringPart(entry.getKey(), entry.getValue(), ConstantData.DEFAULT_CHARSET);
+				index++;
+			}
+			for (Iterator<Map.Entry<String, String>> iterator = fileMap.entrySet().iterator(); iterator.hasNext();) {
+				Map.Entry<String, String> entry = (Map.Entry<String, String>) iterator.next();
+				parts[index] = new FilePart(entry.getKey(), new File(entry.getValue()));
+				index++;
+			}
+			filePost.setRequestEntity(new MultipartRequestEntity(parts, filePost.getParams()));
+			client.executeMethod(filePost);
+			resp = filePost.getResponseBodyAsString();
+		} catch (Exception e) {
+			logger.error("上传文件失败", e);
+		} finally {
+			filePost.releaseConnection();
+		}
+		return resp;
+	}
+
+	/**
+	 * 文件上传
+	 * 
+	 * @param url
+	 *            地址
 	 * @param filePath
 	 *            文件路径
 	 * @param params
@@ -390,7 +627,7 @@ public class HttpClientUtil {
 			Part[] parts = new Part[params.size() + 1];
 			int index = 0;
 			for (Map.Entry<String, String> entry : params.entrySet()) {
-				parts[index] = new StringPart(entry.getKey(), entry.getValue());
+				parts[index] = new StringPart(entry.getKey(), entry.getValue(), ConstantData.DEFAULT_CHARSET);
 				index++;
 			}
 			parts[index] = new FilePart("file", targetFile);
@@ -509,13 +746,5 @@ public class HttpClientUtil {
 			index++;
 		}
 		return paramPair;
-	}
-
-	public static void main(String[] args) {
-		String url = "http://localhost:8080/demo/test/testChinese.do";
-		Map<String, String> param = new HashMap<String, String>();
-		param.put("info", "我是大哥,oh my god!!!");
-		String result = HttpClientUtil.post(url, param);
-		System.out.println(result);
 	}
 }
