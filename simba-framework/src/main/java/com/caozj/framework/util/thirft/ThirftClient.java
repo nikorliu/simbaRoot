@@ -42,6 +42,11 @@ public abstract class ThirftClient {
 	private Object data;
 
 	/**
+	 * 调用thirft服务返回的结果
+	 */
+	private Object result;
+
+	/**
 	 * thirft回调方法，只有客户端类型为 异步非阻塞时才有效
 	 */
 	private AsyncMethodCallback<?> callback;
@@ -73,7 +78,7 @@ public abstract class ThirftClient {
 	/**
 	 * 具体的业务逻辑实现
 	 */
-	protected abstract void request();
+	protected abstract Object request();
 
 	/**
 	 * 发送thirft请求
@@ -109,7 +114,7 @@ public abstract class ThirftClient {
 		syncTransport.open();
 		// 使用高密度二进制协议
 		protocol = new TCompactProtocol(syncTransport);
-		request();
+		result = request();
 		syncTransport.close();
 	}
 
@@ -123,7 +128,7 @@ public abstract class ThirftClient {
 		asyncTransport = new TNonblockingSocket(ip, port);
 		// 使用高密度二进制协议
 		protocolFactory = new TCompactProtocol.Factory();
-		request();
+		result = request();
 	}
 
 	public String getIp() {
@@ -164,6 +169,14 @@ public abstract class ThirftClient {
 
 	public void setType(ThirftClientType type) {
 		this.type = type;
+	}
+
+	public Object getResult() {
+		return result;
+	}
+
+	public void setResult(Object result) {
+		this.result = result;
 	}
 
 }
