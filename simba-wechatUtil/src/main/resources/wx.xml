@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wx>
+	<events>
+		<event type="CLICK" parser="com.caozj.interfaces.impl.BaseEventParse" dealMethod="clickMenu" />
+		<event type="VIEW" parser="com.caozj.interfaces.impl.MenuEventParse" dealMethod="clickForward" />
+		<event type="scancode_push" parser="com.caozj.interfaces.impl.ScanCodeParse" dealMethod="scanPush" />
+		<event type="scancode_waitmsg" parser="com.caozj.interfaces.impl.ScanCodeParse" dealMethod="scanWait" />
+		<event type="pic_sysphoto" parser="com.caozj.interfaces.impl.PhotoEventParse" dealMethod="sysPhoto" />
+		<event type="pic_photo_or_album" parser="com.caozj.interfaces.impl.PhotoEventParse" dealMethod="photoOrAlbum" />
+		<event type="pic_weixin" parser="com.caozj.interfaces.impl.PhotoEventParse" dealMethod="weixinPhoto" />
+		<event type="location_select" parser="com.caozj.interfaces.impl.LocationEventParse" dealMethod="locationSelect" />
+		<event type="subscribe" parser="com.caozj.interfaces.impl.TicketEventParse" dealMethod="subscribe" />
+		<event type="unsubscribe" parser="com.caozj.interfaces.impl.BaseEventParse" dealMethod="unsubscribe" />
+		<event type="SCAN" parser="com.caozj.interfaces.impl.TicketEventParse" dealMethod="scan" />
+		<event type="LOCATION" parser="com.caozj.interfaces.impl.ReportLocationEventParse" dealMethod="reportLocation" />
+		<event type="MASSSENDJOBFINISH" parser="com.caozj.interfaces.impl.GroupMessageEventParse" dealMethod="groupMessage" />
+		<event type="TEMPLATESENDJOBFINISH" parser="com.caozj.interfaces.impl.TemplateEventParse" dealMethod="template" />
+		<event type="qualification_verify_success" parser="com.caozj.interfaces.impl.VerifySuccessEventParse" dealMethod="qualificationVerifySuccess" />
+		<event type="qualification_verify_fail" parser="com.caozj.interfaces.impl.VerifyFailEventParse" dealMethod="qualificationVerifyFail" />
+		<event type="naming_verify_success" parser="com.caozj.interfaces.impl.VerifySuccessEventParse" dealMethod="namingVerifySuccess" />
+		<event type="naming_verify_fail" parser="com.caozj.interfaces.impl.VerifyFailEventParse" dealMethod="namingVerifyFail" />
+		<event type="annual_renew" parser="com.caozj.interfaces.impl.VerifySuccessEventParse" dealMethod="annualRenew" />
+		<event type="verify_expired" parser="com.caozj.interfaces.impl.VerifySuccessEventParse" dealMethod="verifyExpired" />
+	</events>
+
+	<msgs>
+		<msg type="text" parser="com.caozj.interfaces.impl.TextParse" dealMethod="text" />
+		<msg type="image" parser="com.caozj.interfaces.impl.ImageParse" dealMethod="image" />
+		<msg type="voice" parser="com.caozj.interfaces.impl.VoiceParse" dealMethod="voice" />
+		<msg type="video" parser="com.caozj.interfaces.impl.VideoParse" dealMethod="video" />
+		<msg type="shortvideo" parser="com.caozj.interfaces.impl.VideoParse" dealMethod="video" />
+		<msg type="location" parser="com.caozj.interfaces.impl.LocationParse" dealMethod="location" />
+		<msg type="link" parser="com.caozj.interfaces.impl.LinkParse" dealMethod="link" />
+	</msgs>
+</wx>

@@ -88,7 +88,10 @@
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-echarts</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.caozj</groupId>
+			<artifactId>simba-wechatUtil</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
