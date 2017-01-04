@@ -16,7 +16,7 @@
 	<import resource="classpath:/SpringAop.xml" />
 	<import resource="classpath:/SpringCache.xml" />
 	
-	<context:component-scan base-package="com.caozj.framework.websocketl" />
+	<context:component-scan base-package="com.caozj.framework.websocket" />
 	<context:component-scan base-package="com.caozj.framework.util" />
 	<context:component-scan base-package="com.caozj.framework.session" />
 	<context:component-scan base-package="com.caozj.framework.distributed" />

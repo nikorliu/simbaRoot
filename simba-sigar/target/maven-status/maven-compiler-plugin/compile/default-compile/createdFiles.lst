@@ -1,9 +1,0 @@
-com\caozj\sigar\jobs\CollectDataJob.class
-com\caozj\sigar\service\CapabilityService.class
-com\caozj\sigar\dao\CapabilityDao.class
-com\caozj\sigar\dao\impl\CapabilityDaoImpl.class
-com\caozj\sigar\model\enums\CapabilityType.class
-com\caozj\sigar\controller\CapabilityController.class
-com\caozj\sigar\service\impl\CapabilityServiceImpl.class
-com\caozj\sigar\model\enums\CapabilityNetworkSubType.class
-com\caozj\sigar\model\Capability.class

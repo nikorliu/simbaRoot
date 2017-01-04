@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="simba-web">
+    <wb-module deploy-name="simba-user">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
@@ -25,19 +25,7 @@
         <dependent-module archiveName="simba-job-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-job/simba-job">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="simba-menu-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-menu/simba-menu">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="simba-permission-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-permission/simba-permission">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="simba-registry-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-registry/simba-registry">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="simba-activiti-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-activiti/simba-activiti">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="simba-buss-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-buss/simba-buss">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="simba-address-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-address/simba-address">
@@ -52,10 +40,7 @@
         <dependent-module archiveName="simba-echarts-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-echarts/simba-echarts">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="simba-wechatUtil-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-wechatUtil/simba-wechatUtil">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <property name="context-root" value="simba-web"/>
-        <property name="java-output-path" value="/simba-web/target/classes"/>
+        <property name="context-root" value="simba-user"/>
+        <property name="java-output-path" value="/simba-user/target/classes"/>
     </wb-module>
 </project-modules>

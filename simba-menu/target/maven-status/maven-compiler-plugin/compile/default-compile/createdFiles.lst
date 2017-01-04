@@ -1,6 +1,0 @@
-com\caozj\menu\model\Menu.class
-com\caozj\menu\service\impl\MenuServiceImpl.class
-com\caozj\menu\dao\impl\MenuDaoImpl.class
-com\caozj\menu\service\MenuService.class
-com\caozj\menu\controller\MenuController.class
-com\caozj\menu\dao\MenuDao.class
