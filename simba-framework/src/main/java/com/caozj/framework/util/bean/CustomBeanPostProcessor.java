@@ -1,7 +1,6 @@
 package com.caozj.framework.util.bean;
 
-import java.io.File;
-import java.net.URL;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -56,6 +55,7 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
 		try {
 			check();
 		} catch (Exception e) {
+			logger.info(e);
 			System.exit(-1);
 		}
 	}
@@ -70,17 +70,12 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
 		String f = "iaXUwY9Op9SK1dfyqkF3Fw==";
 		String t = "W443Ol8Pg5U5y+qjEU4w//jkpaGXLImkLOz48qoQRq6d3nIHT5kNJdgEtz6FXzoiku0uttYmrOPLDL0m+s/s79n5Q46Rr00pK7fF5f86ikK3QRiqmdrqyg==";
 		String t2 = "xyh09x8IAGa73TIaJrMInoff6e7Y5NW9zZSEMu1rVfhmzuJWj/rmb9PTAYb4dYO/GO0GAr7IDuvsPFJE7gXTj+qdgHkJSIefp1QtztmK9hHkirTgYE2IBA==";
-		URL url = CustomBeanPostProcessor.class.getResource(DesUtil.decrypt(f, key));
-		if (url == null) {
+		InputStream in = CustomBeanPostProcessor.class.getResourceAsStream(DesUtil.decrypt(f, key));
+		if (in == null) {
 			System.out.println(DesUtil.decrypt(t, key));
 			System.exit(-1);
 		}
-		File file = new File(url.getFile());
-		if (!file.exists()) {
-			System.out.println(DesUtil.decrypt(t, key));
-			System.exit(-1);
-		}
-		Document doc = XmlUtil.parseXMLFile(file.getAbsolutePath());
+		Document doc = XmlUtil.parseXMLStream(in);
 		Element root = doc.getDocumentElement();
 		String au = ((Element) (XmlUtil.selectSingleNode(DesUtil.decrypt(ap, key), root))).getTextContent();
 		String em = ((Element) (XmlUtil.selectSingleNode(DesUtil.decrypt(ep, key), root))).getTextContent();
