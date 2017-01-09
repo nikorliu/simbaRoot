@@ -292,4 +292,29 @@ public interface WxConstantData {
 	 * 长链接转短链接
 	 */
 	String convertShortUrl = "https://" + wxDomain + "/cgi-bin/shorturl";
+
+	/**
+	 * 通过code换取网页授权access_token
+	 */
+	String getWebAccessTokenUrl = "https://" + wxDomain + "/sns/oauth2/access_token";
+
+	/**
+	 * 刷新access_token
+	 */
+	String refreshWebAccessTokenUrl = "https://" + wxDomain + "/sns/oauth2/refresh_token";
+
+	/**
+	 * 拉取用户信息(需scope为 snsapi_userinfo)
+	 */
+	String getUserInfoByWebAccessTokenUrl = "https://" + wxDomain + "/sns/userinfo";
+
+	/**
+	 * 检验授权凭证（access_token）是否有效
+	 */
+	String checkWebAccessTokenUrl = "https://" + wxDomain + "/sns/auth";
+
+	/**
+	 * jsapi_ticket
+	 */
+	String getJsApiTicketUrl = "https://" + wxDomain + "/cgi-bin/ticket/getticket";
 }

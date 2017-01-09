@@ -40,6 +40,9 @@
         <dependent-module archiveName="simba-echarts-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-echarts/simba-echarts">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="simba-wechatUtil-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-wechatUtil/simba-wechatUtil">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="simba-user"/>
         <property name="java-output-path" value="/simba-user/target/classes"/>
     </wb-module>

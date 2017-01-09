@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.caozj.util.common.AccessTokenUtil;
+import com.caozj.util.send.JsApiTicketUtil;
 
 /**
  * 定时获取access_token的定时器(每小时执行一次)
@@ -14,18 +14,18 @@ import com.caozj.util.common.AccessTokenUtil;
  *
  */
 @Component
-public class AccessTokenJob {
+public class JsApiTicketJob {
 
 	@Autowired
-	private AccessTokenUtil accessTokenUtil;
+	private JsApiTicketUtil jsApiTicketUtil;
 
-	@Value("${wx.access.token.job.enable}")
+	@Value("${wx.jsApi.ticket.job.enable}")
 	private String enable;
 
-	@Scheduled(fixedRate = 3600000, initialDelay = 5000)
+	@Scheduled(fixedRate = 3600000, initialDelay = 15000)
 	public void requestAccessToken() {
 		if ("true".equals(enable)) {
-			accessTokenUtil.requestAccessToken();
+			jsApiTicketUtil.requestTicket();
 		}
 	}
 
