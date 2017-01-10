@@ -3,7 +3,11 @@
 初始化脚本在doc目录中，    
 目前只提供了mysql版本，ppt有基本的使用介绍，    
 由于时间关系并未包含所有的功能介绍。    
-配置环境变量JAVA_HOME到jdk的安装目录，必须使用jdk1.8    
+配置环境变量JAVA_HOME到jdk的安装目录，必须使用jdk1.8  
+配置Path环境变量，增加JAVA_HOME/bin	
+配置MAVEN_HOME环境变量，指到MAVEN的安装目录	
+所有的路径最好不要有中文，不然会有莫名的错误	
+
 直接运行Jetty类的main方法，即可启动web服务    
 登陆系统的入口:     
 http://localhost:9000/simba/login/toLogin.do  
