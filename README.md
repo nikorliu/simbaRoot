@@ -8,6 +8,10 @@
 配置MAVEN_HOME环境变量，指到MAVEN的安装目录	
 所有的路径最好不要有中文，不然会有莫名的错误	
 
+如果使用框架自带的websocket服务器的功能，使用本地jetty跑没问题，如果使用tomcat跑，必须是tomcat9			
+
+
+
 直接运行Jetty类的main方法，即可启动web服务    
 如果访问jsp页面报错说编译错误，可能是因为安装了多个版本的jdk冲突了，请卸载所有jdk，重新安装jdk1.8		
 
