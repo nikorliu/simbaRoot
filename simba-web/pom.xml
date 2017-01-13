@@ -45,7 +45,7 @@
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-service</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-job</artifactId>
@@ -54,12 +54,12 @@
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-menu</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-permission</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-registry</artifactId>
@@ -87,10 +87,6 @@
 		<dependency>
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-echarts</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.caozj</groupId>
-			<artifactId>simba-wechatUtil</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -17,7 +17,7 @@ public class WxException extends RuntimeException {
 	private String message;
 
 	public WxException(String message, int errcode, String errmsg) {
-		super(message);
+		super(message + ",errcode:" + errcode + ",errmsg:" + errmsg);
 		this.message = message;
 		this.errcode = errcode;
 		this.errmsg = errmsg;

@@ -28,6 +28,8 @@
 		<module>simba-fastdfs</module>
 		<module>simba-wechatUtil</module>
 		<module>simba-user</module>
+		<module>simba-wechatHardware</module>
+		<module>simba-wechatPay</module>
 	</modules>
 
 	<name>simbaRoot</name>
@@ -808,6 +810,16 @@
 			<dependency>
 				<groupId>com.caozj</groupId>
 				<artifactId>simba-wechatUtil</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-wechatHardware</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-wechatPay</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>

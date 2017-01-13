@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wx>
+	<msg type="device_text" parser="com.caozj.model.wxHardware.receive.DeviceRequestMsg" dealMethod="text" />
+	<msg type="bind" parser="com.caozj.model.wxHardware.receive.BindRequestEvent" dealMethod="bind" />
+	<msg type="unbind" parser="com.caozj.model.wxHardware.receive.BindRequestEvent" dealMethod="unbind" />
+</wx>

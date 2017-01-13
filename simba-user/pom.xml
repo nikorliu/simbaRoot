@@ -75,6 +75,14 @@
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-wechatUtil</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.caozj</groupId>
+			<artifactId>simba-wechatHardware</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.caozj</groupId>
+			<artifactId>simba-wechatPay</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
