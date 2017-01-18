@@ -46,7 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (SessionUtil.isLogin(request.getSession())) {
 			return true;
 		}
-		throw new LoginException("您还未登陆系统");
+		throw new LoginException("您还未登陆系统,所以不能访问" + requestUri);
 	}
 
 	@Override

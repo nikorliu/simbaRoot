@@ -51,7 +51,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		if (SessionUtil.hasPermission(request)) {
 			return true;
 		}
-		throw new ForbidException("您没有权限访问");
+		throw new ForbidException("您没有权限访问,所以不能访问" + requestUri);
 	}
 
 	@Override
