@@ -72,7 +72,7 @@ public class DealHardwareUtil {
 	public String deal(String json)
 			throws ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
 		Map<String, Object> map = FastJsonUtil.toObject(json, HashMap.class);
-		String msgType = map.get("MsgType").toString();
+		String msgType = map.get("msg_type").toString();
 		ConfType conf = typeMap.get(msgType);
 		if (conf == null) {
 			throw new RuntimeException("配置文件wxHardware.xml中找不到可以处理的配置:" + json);
