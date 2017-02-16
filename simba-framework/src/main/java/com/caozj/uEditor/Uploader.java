@@ -3,6 +3,7 @@ package com.caozj.uEditor;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.caozj.common.CustomizedPropertyPlaceholderConfigurer;
 import com.caozj.framework.util.upload.UploadUtil;
+import com.caozj.model.constant.ConstantData;
 
 /**
  * UEditor文件上传辅助工具类
@@ -112,7 +114,8 @@ public class Uploader {
 		this.fileName = this.getName(this.originalName);
 		this.type = this.getFileExt(this.fileName);
 		if ("local".equals(storage)) {
-			this.url = request.getContextPath() + UploadUtil.getInstance().getUpload().upload(file.getBytes(), file.getOriginalFilename(), "ueditor");
+			this.url = request.getContextPath() + "/download/download.do?fileName="
+					+ URLEncoder.encode(UploadUtil.getInstance().getUpload().upload(file.getBytes(), file.getOriginalFilename(), "ueditor"), ConstantData.DEFAULT_CHARSET);
 		} else {
 			this.url = UploadUtil.getInstance().getUpload().upload(file.getBytes(), file.getOriginalFilename(), "ueditor");
 		}
