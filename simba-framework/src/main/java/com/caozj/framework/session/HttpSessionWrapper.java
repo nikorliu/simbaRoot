@@ -124,7 +124,7 @@ public class HttpSessionWrapper implements HttpSession {
 			return;
 		}
 		this.getMap().put(key, value);
-		SessionServiceFactory.getInstance(sessionType).saveSession(this.sid, this.getMap(), expiry);
+		SessionServiceFactory.getInstance(sessionType).saveSession(this.sid, this.getMap(), expiry/1000);
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class HttpSessionWrapper implements HttpSession {
 	public void removeAttribute(String name) {
 		accessedTime = System.currentTimeMillis();
 		this.getMap().remove(name);
-		SessionServiceFactory.getInstance(sessionType).saveSession(this.sid, this.getMap(), expiry);
+		SessionServiceFactory.getInstance(sessionType).saveSession(this.sid, this.getMap(), expiry/1000);
 	}
 
 	@Override
