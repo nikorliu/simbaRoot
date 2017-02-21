@@ -1,5 +1,7 @@
 package com.caozj.interfaces;
 
+import com.caozj.model.wx.receive.deviceEvent.DeviceEvent;
+import com.caozj.model.wx.receive.deviceEvent.DeviceEventResp;
 import com.caozj.model.wx.receive.event.BaseEvent;
 import com.caozj.model.wx.receive.event.GroupMessageEvent;
 import com.caozj.model.wx.receive.event.LocationEvent;
@@ -207,4 +209,18 @@ public interface DealInterface {
 	 * @param event
 	 */
 	void verifyExpired(VerifySuccessEvent event);
+
+	/**
+	 * 订阅设备状态
+	 * 
+	 * @param event
+	 */
+	DeviceEventResp subscribeStatus(DeviceEvent event) throws Exception;
+
+	/**
+	 * 退订设备状态
+	 * 
+	 * @param event
+	 */
+	DeviceEventResp unsubscribeStatus(DeviceEvent event);
 }

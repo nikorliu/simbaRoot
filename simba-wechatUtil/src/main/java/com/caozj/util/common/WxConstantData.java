@@ -317,4 +317,9 @@ public interface WxConstantData {
 	 * jsapi_ticket
 	 */
 	String getJsApiTicketUrl = "https://" + wxDomain + "/cgi-bin/ticket/getticket";
+
+	/**
+	 * 第三方主动发送设备状态消息给微信终端
+	 */
+	String deviceStatusUrl = "https://" + wxDomain + "/device/transmsg";
 }

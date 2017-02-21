@@ -3,6 +3,8 @@ package com.caozj.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,6 +31,8 @@ import com.caozj.util.send.StatusWxUtil;
 @RequestMapping("/operHardware")
 public class OperHardwareController {
 
+	private static final Log logger = LogFactory.getLog(OperHardwareController.class);
+
 	@Autowired
 	private BindWxUtil bindWxUtil;
 
@@ -47,6 +51,7 @@ public class OperHardwareController {
 	 */
 	@RequestMapping
 	public String unbindDevice(String openid, String deviceId, ModelMap model) {
+		logger.info("**********************收到解除设备绑定的请求**********************");
 		BindForce unbind = new BindForce();
 		unbind.setOpenid(openid);
 		unbind.setDevice_id(deviceId);
@@ -64,6 +69,7 @@ public class OperHardwareController {
 	 */
 	@RequestMapping
 	public String searchDeviceStatus(String deviceId, ModelMap model) {
+		logger.info("**********************收到 查询设备状态的请求**********************");
 		StatusResult result = statusWxUtil.search(deviceId);
 		model.put("message", FastJsonUtil.toJson(new JsonResult(result.getStatus(), result.getStatus_info(), 200)));
 		return "message";
@@ -78,6 +84,7 @@ public class OperHardwareController {
 	 */
 	@RequestMapping
 	public String genQrcode(String productId, ModelMap model) {
+		logger.info("**********************收到生成二维码和对应的设备id的请求**********************");
 		GetDeviceQrcodeResult result = newAuthWxUtil.getDeviceQrcode(productId);
 		model.put("message", FastJsonUtil.toJson(new JsonResult(result)));
 		return "message";
@@ -92,6 +99,7 @@ public class OperHardwareController {
 	 */
 	@RequestMapping
 	public String updateDevicePros(Device device, ModelMap model) {
+		logger.info("**********************收到利用deviceid更新设备属性的请求**********************");
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setDevice_num("1");
 		deviceInfo.setOp_type("1");

@@ -58,8 +58,8 @@ public class ReceiveController {
 			String xml = IOUtils.toString(in, ConstantData.DEFAULT_CHARSET);
 			logger.info("*********************接收到微信服务器发来的消息:" + xml + "**********");
 			// 处理消息
-			dealReceiveUtil.deal(xml);
-			model.put("message", "success");
+			String result = dealReceiveUtil.deal(xml);
+			model.put("message", result);
 		} catch (Exception e) {
 			logger.error("处理接收到的微信服务器信息异常", e);
 			model.put("message", "");
