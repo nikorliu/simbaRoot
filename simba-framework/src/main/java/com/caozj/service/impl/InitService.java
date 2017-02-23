@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import com.caozj.annotation.TimeAnnotation;
+import com.caozj.framework.util.upload.UploadUtil;
 
 /**
  * 初始化类
@@ -33,7 +34,7 @@ public class InitService {
 		System.out.println("+            _.-``-.-''-._                                            +");
 		System.out.println("+       _.-``     `  `    ''-._                                       +");
 		System.out.println("+    .-`` .-```. ```````  ```-.''-._                                  +");
-		System.out.println("+  (    '         Simba       '     )                                 +");
+		System.out.println("+  (    '         simba       '     )                                 +");
 		System.out.println("+  |`-._`-...-- __...-...__ - ` _.-'|                                 +");
 		System.out.println("+  |    `-._                _.-'    |                                 +");
 		System.out.println("+   `-._    `-._  caozj  .-'    _.-'                                  +");

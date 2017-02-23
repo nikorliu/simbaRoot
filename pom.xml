@@ -30,6 +30,11 @@
 		<module>simba-user</module>
 		<module>simba-wechatHardware</module>
 		<module>simba-wechatPay</module>
+		<module>simba-framework-common</module>
+		<module>simba-framework-util</module>
+		<module>simba-framework-database</module>
+		<module>simba-framework-cache</module>
+		<module>simba-framework-distribute</module>
 	</modules>
 
 	<name>simbaRoot</name>
@@ -58,7 +63,9 @@
 		<groovy.version>2.4.7</groovy.version>
 		<jmagick.version>6.6.9</jmagick.version>
 		<json.version>20090211</json.version>
+		<net.sf.json-lib.version>2.4</net.sf.json-lib.version>
 		<jdom.version>1.1</jdom.version>
+		<net.sf.ezmorph.version>1.0.4</net.sf.ezmorph.version>
 		<mail.version>1.4.4</mail.version>
 		<xstream.version>1.4.2</xstream.version>
 		<pinyin4j.version>2.5.0</pinyin4j.version>
@@ -691,11 +698,24 @@
 				<artifactId>libthrift</artifactId>
 				<version>0.9.3</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>${net.sf.json-lib.version}</version>
+				<classifier>jdk15</classifier>
+			</dependency>
 
 			<dependency>
 				<groupId>javax.websocket</groupId>
 				<artifactId>javax.websocket-client-api</artifactId>
 				<version>1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sf.ezmorph</groupId>
+				<artifactId>ezmorph</artifactId>
+				<version>${net.sf.ezmorph.version}</version>
 			</dependency>
 
 			<dependency>
@@ -735,6 +755,31 @@
 			<dependency>
 				<groupId>com.caozj</groupId>
 				<artifactId>simba-framework</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-framework-common</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-framework-util</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-framework-database</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-framework-cache</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.caozj</groupId>
+				<artifactId>simba-framework-distribute</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>

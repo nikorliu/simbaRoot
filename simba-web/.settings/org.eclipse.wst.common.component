@@ -13,6 +13,21 @@
         <dependent-module archiveName="simba-fastdfs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-fastdfs/simba-fastdfs">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="simba-framework-database-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-framework-database/simba-framework-database">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="simba-framework-util-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-framework-util/simba-framework-util">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="simba-framework-common-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-framework-common/simba-framework-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="simba-framework-distribute-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-framework-distribute/simba-framework-distribute">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="simba-framework-cache-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-framework-cache/simba-framework-cache">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="simba-service-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-service/simba-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
