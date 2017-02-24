@@ -28,6 +28,9 @@
         <dependent-module archiveName="simba-framework-cache-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-framework-cache/simba-framework-cache">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="simba-aliyun-oss-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-aliyun-oss/simba-aliyun-oss">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="simba-service-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/simba-service/simba-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>

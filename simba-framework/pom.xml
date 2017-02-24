@@ -92,5 +92,9 @@
 			<groupId>com.caozj</groupId>
 			<artifactId>simba-framework-distribute</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.caozj</groupId>
+			<artifactId>simba-aliyun-oss</artifactId>
+		</dependency>
 	</dependencies>
 </project>

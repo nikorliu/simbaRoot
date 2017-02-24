@@ -28,6 +28,8 @@ public class UploadUtil {
 			upload = LocalUpload.getInstance();
 		} else if ("fastdfs".equals(storage)) {
 			upload = FastdfsUpload.getInstance();
+		} else if ("alioss".equals(storage)) {
+			upload = AliOssUpload.getInstance();
 		}
 	}
 
