@@ -1,10 +1,13 @@
 package com.caozj.model.wx.web;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.caozj.model.wx.ErrMsg;
 
-public class UserInfo extends ErrMsg {
+public class UserInfo extends ErrMsg implements Serializable {
+
+	private static final long serialVersionUID = 1231032533319542917L;
 
 	/**
 	 * 用户的标识，对当前公众号唯一
