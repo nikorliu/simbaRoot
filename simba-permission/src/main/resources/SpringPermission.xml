@@ -11,14 +11,14 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.caozj.common.LoginInterceptor" />
+			<bean class="com.simba.common.LoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.caozj.common.PermissionInterceptor" />
+			<bean class="com.simba.common.PermissionInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-	<context:component-scan base-package="com.caozj.permission" />
+	<context:component-scan base-package="com.simba.permission" />
 
 </beans>

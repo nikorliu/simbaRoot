@@ -14,7 +14,7 @@
 <body>
 	<script type="text/javascript">
 		Ext.onReady(function() {
-			Index.initMenuFrame("${sessUser.name}","<%=com.caozj.util.SessionUtil.isAdmin(session)%>");
+			Index.initMenuFrame("${sessUser.name}","<%=com.simba.util.SessionUtil.isAdmin(session)%>");
 		});
 	</script>
 </body>

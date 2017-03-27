@@ -1,11 +1,11 @@
-package com.caozj.test;
+package com.simba.test;
 
 import java.io.IOException;
 
-import com.caozj.codegenerate.CODETYPE;
-import com.caozj.codegenerate.CodeGenerateUtil;
-import com.caozj.codegenerate.PAGETYPE;
-import com.caozj.common.CustomizedPropertyPlaceholderConfigurer;
+import com.simba.codegenerate.CODETYPE;
+import com.simba.codegenerate.CodeGenerateUtil;
+import com.simba.codegenerate.PAGETYPE;
+import com.simba.common.CustomizedPropertyPlaceholderConfigurer;
 
 import freemarker.template.TemplateException;
 

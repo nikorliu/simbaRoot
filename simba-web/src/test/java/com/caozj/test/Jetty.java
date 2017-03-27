@@ -1,4 +1,4 @@
-package com.caozj.test;
+package com.simba.test;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;

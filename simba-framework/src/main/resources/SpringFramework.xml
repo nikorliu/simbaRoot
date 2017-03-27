@@ -16,16 +16,16 @@
 	<import resource="classpath:/SpringAop.xml" />
 	<import resource="classpath:/SpringCache.xml" />
 
-	<context:component-scan base-package="com.caozj.framework.websocket" />
-	<context:component-scan base-package="com.caozj.framework.util" />
-	<context:component-scan base-package="com.caozj.framework.session" />
-	<context:component-scan base-package="com.caozj.framework.distributed" />
-	<context:component-scan base-package="com.caozj.common" />
-	<context:component-scan base-package="com.caozj.uEditor" />
-	<context:component-scan base-package="com.caozj.aspect" />
-	<context:component-scan base-package="com.caozj.cache" />
-	<context:component-scan base-package="com.caozj.util" />
-	<context:component-scan base-package="com.caozj.page" />
-	<context:component-scan base-package="com.caozj.jobs" />
-	<context:component-scan base-package="com.caozj.cluster" />
+	<context:component-scan base-package="com.simba.framework.websocket" />
+	<context:component-scan base-package="com.simba.framework.util" />
+	<context:component-scan base-package="com.simba.framework.session" />
+	<context:component-scan base-package="com.simba.framework.distributed" />
+	<context:component-scan base-package="com.simba.common" />
+	<context:component-scan base-package="com.simba.uEditor" />
+	<context:component-scan base-package="com.simba.aspect" />
+	<context:component-scan base-package="com.simba.cache" />
+	<context:component-scan base-package="com.simba.util" />
+	<context:component-scan base-package="com.simba.page" />
+	<context:component-scan base-package="com.simba.jobs" />
+	<context:component-scan base-package="com.simba.cluster" />
 </beans>

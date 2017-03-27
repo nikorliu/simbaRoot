@@ -24,12 +24,12 @@
 			<set>
 				<!-- 同步Map缓存 -->
 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
-					<property name="name" value="#{T(com.caozj.common.CustomizedPropertyPlaceholderConfigurer).getContextProperty('session.isEnableDistributedSession') eq 'true' ? 'local':'default'}" />
+					<property name="name" value="#{T(com.simba.common.CustomizedPropertyPlaceholderConfigurer).getContextProperty('session.isEnableDistributedSession') eq 'true' ? 'local':'default'}" />
 				</bean>
 				<!-- Redis緩存 -->
-				<bean class="com.caozj.cache.RedisCache">
+				<bean class="com.simba.cache.RedisCache">
 					<property name="redisTemplate" ref="redisTemplate" />
-					<property name="name" value="#{T(com.caozj.common.CustomizedPropertyPlaceholderConfigurer).getContextProperty('session.isEnableDistributedSession') eq 'true' ? 'default':'redis'}" />
+					<property name="name" value="#{T(com.simba.common.CustomizedPropertyPlaceholderConfigurer).getContextProperty('session.isEnableDistributedSession') eq 'true' ? 'default':'redis'}" />
 				</bean>
 			</set>
 		</property>

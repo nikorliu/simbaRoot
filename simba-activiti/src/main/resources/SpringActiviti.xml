@@ -26,7 +26,7 @@
 		</property>
 		<property name="customFormEngines">
 			<list>
-				<bean class="com.caozj.activiti.impl.FreemarkerFormEngine" />
+				<bean class="com.simba.activiti.impl.FreemarkerFormEngine" />
 			</list>
 		</property>
 	</bean>
@@ -43,5 +43,5 @@
 	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
 	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService" />
 
-	<context:component-scan base-package="com.caozj.activiti" />
+	<context:component-scan base-package="com.simba.activiti" />
 </beans>

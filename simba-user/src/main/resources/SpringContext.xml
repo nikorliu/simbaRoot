@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<!-- 配置文件 -->
-	<bean class="com.caozj.common.CustomizedPropertyPlaceholderConfigurer">
+	<bean class="com.simba.common.CustomizedPropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:/configs.properties</value>

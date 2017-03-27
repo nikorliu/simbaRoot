@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<packaging>pom</packaging>
-	<groupId>com.caozj</groupId>
+	<groupId>com.simba</groupId>
 	<artifactId>simbaRoot</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
@@ -36,6 +36,7 @@
 		<module>simba-framework-cache</module>
 		<module>simba-framework-distribute</module>
 		<module>simba-aliyun-oss</module>
+		<module>simba-mongodb</module>
 	</modules>
 
 	<name>simbaRoot</name>
@@ -744,132 +745,144 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-mongodb</artifactId>
+				<version>1.10.1.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongo-java-driver</artifactId>
+				<version>3.4.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-codeGenerate</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-fastdfs</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-framework</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-framework-common</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-framework-util</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-framework-database</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-framework-cache</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-framework-distribute</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-model</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-dao</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-service</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-util</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-permission</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-job</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-aliyun-oss</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-menu</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-registry</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-activiti</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-buss</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-sigar</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-expressage</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-address</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-echarts</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-wechatUtil</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-wechatHardware</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.caozj</groupId>
+				<groupId>com.simba</groupId>
 				<artifactId>simba-wechatPay</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>

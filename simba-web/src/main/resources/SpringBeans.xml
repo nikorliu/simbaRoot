@@ -2,14 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<context:component-scan base-package="com.caozj.dao" name-generator="com.caozj.framework.util.bean.BeanNameGenerator" />
-	<context:component-scan base-package="com.caozj.service" name-generator="com.caozj.framework.util.bean.BeanNameGenerator" />
-	<context:component-scan base-package="com.caozj.controller" />
-	<context:component-scan base-package="com.caozj.job" />
-	<context:component-scan base-package="com.caozj.menu" />
-	<context:component-scan base-package="com.caozj.registry" />
-	<context:component-scan base-package="com.caozj.sigar" />
-	<context:component-scan base-package="com.caozj.buss" />
-	<context:component-scan base-package="com.caozj.address" />
+	<context:component-scan base-package="com.simba.dao" name-generator="com.simba.framework.util.bean.BeanNameGenerator" />
+	<context:component-scan base-package="com.simba.service" name-generator="com.simba.framework.util.bean.BeanNameGenerator" />
+	<context:component-scan base-package="com.simba.controller" />
+	<context:component-scan base-package="com.simba.job" />
+	<context:component-scan base-package="com.simba.menu" />
+	<context:component-scan base-package="com.simba.registry" />
+	<context:component-scan base-package="com.simba.sigar" />
+	<context:component-scan base-package="com.simba.buss" />
+	<context:component-scan base-package="com.simba.address" />
 
 </beans>

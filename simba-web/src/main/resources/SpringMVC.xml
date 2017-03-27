@@ -12,7 +12,7 @@
 	<context:annotation-config />
 
 	<!-- 配置文件 -->
-	<bean class="com.caozj.common.CustomizedPropertyPlaceholderConfigurer">
+	<bean class="com.simba.common.CustomizedPropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:/configs.properties</value>
@@ -28,7 +28,7 @@
 	</bean>
 
 	<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
-	<bean id="multipartResolver" class="com.caozj.uEditor.CustomMultipartResolver">
+	<bean id="multipartResolver" class="com.simba.uEditor.CustomMultipartResolver">
 		<!-- 指定所上传文件的总大小不能超过20M。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
 		<property name="maxUploadSize" value="20000000" />
 		<property name="excludeUrlPatternList">
@@ -39,7 +39,7 @@
 	</bean>
 
 	<!-- 统一异常处理 -->
-	<bean class="com.caozj.common.CommonExceptionResolver" />
+	<bean class="com.simba.common.CommonExceptionResolver" />
 
 	<!-- mvc 注解 -->
 	<mvc:annotation-driven />

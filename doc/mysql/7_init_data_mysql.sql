@@ -1,2 +1,2 @@
 # 如果没有好性能监控和sigar，不要执行这个脚本
-#insert into job(name,description,cronExpression,status,className,methodName) values('性能数据收集任务','收集cpu memory 网络 磁盘等实时性能数据','0 0/1 * * * *','waiting','com.caozj.sigar.jobs.CollectDataJob','collectData');
+#insert into job(name,description,cronExpression,status,className,methodName) values('性能数据收集任务','收集cpu memory 网络 磁盘等实时性能数据','0 0/1 * * * *','waiting','com.simba.sigar.jobs.CollectDataJob','collectData');

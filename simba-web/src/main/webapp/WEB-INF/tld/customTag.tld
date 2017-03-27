@@ -3,11 +3,11 @@
 	<tlib-version>1.0</tlib-version>
 	<jsp-version>2.0</jsp-version>
 	<short-name>caozj</short-name>
-	<uri>http://www.caozj.com</uri>
+	<uri>http://www.simba.com</uri>
 
 	<tag>
 		<name>permission</name>
-		<tag-class>com.caozj.taglib.PermissionTag</tag-class>
+		<tag-class>com.simba.taglib.PermissionTag</tag-class>
 		<body-content>tagdependent</body-content>
 		<attribute>
 			<name>content</name>
@@ -28,7 +28,7 @@
 
 	<tag>
 		<name>tip</name>
-		<tag-class>com.caozj.taglib.TipTag</tag-class>
+		<tag-class>com.simba.taglib.TipTag</tag-class>
 		<body-content>tagdependent</body-content>
 		<attribute>
 			<name>content</name>

@@ -6,7 +6,7 @@
     <param-value>classpath:/SpringContext.xml</param-value>
   </context-param>
   <listener>
-    <listener-class>com.caozj.framework.session.DisSessionListener</listener-class>
+    <listener-class>com.simba.framework.session.DisSessionListener</listener-class>
   </listener>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -102,7 +102,7 @@
 	</filter-mapping> 
   <jsp-config>
     <taglib>
-      <taglib-uri>http://www.caozj.com</taglib-uri>
+      <taglib-uri>http://www.simba.com</taglib-uri>
       <taglib-location>/WEB-INF/tld/customTag.tld</taglib-location>
     </taglib>
   </jsp-config>
